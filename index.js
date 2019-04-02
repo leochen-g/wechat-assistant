@@ -61,7 +61,7 @@ onMessage = async(msg) => {
     const room = msg.room()
     if (msg.self()) return
     if (room) {
-        const roomName = await room.topiac()
+        const roomName = await room.topic()
         console.log(`群名: ${roomName} 发消息人: ${contact.name()} 内容: ${content}`)
     } else {
         console.log(`发消息人: ${contact.name()} 消息内容: ${content}`)
