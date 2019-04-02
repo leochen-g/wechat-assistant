@@ -4,7 +4,7 @@ const { FileBox } = require('file-box')
 const Qrterminal = require('qrcode-terminal')
 const { request } = require('./config/superagent')
 const untils = require('./untils/index')
-const host = 'http://127.0.0.1:3000/api'
+const host = 'http://127.0.0.1:3008/api'
 
 // 每次登录初始化定时任务
 initSchedule = async(list) => {

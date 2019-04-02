@@ -48,6 +48,6 @@ app.on('error', (err) => {
 
 app.use(router.routes())
 app.use(router.allowedMethods())
-app.listen(3000, () => {
-    console.log('[demo] route-use-middleware is starting at port 3000')
+app.listen(3008, () => {
+    console.log('route-use-middleware is starting at port 3008')
 })
