@@ -72,8 +72,8 @@ onMessage = async(msg) => {
             let scheduleObj = untils.contentDistinguish(contact, keywordArray)
             addSchedule(scheduleObj)
             contact.say('小助手已经把你的提醒牢记在小本本上了')
-        } else {
-            contact.say('很高兴成为你的小秘书，来试试我的新功能吧！回复案例：“提醒 我 18:30 下班回家”，创建你的专属提醒，记得关键词之间使用空格分隔开')
+        } else if (content && content.indexOf('你好') > -1) {
+            contact.say('你好，很高兴成为你的小秘书，来试试我的新功能吧！回复案例：“提醒 我 18:30 下班回家”，创建你的专属提醒，记得关键词之间使用空格分隔开')
         }
     }
 }
