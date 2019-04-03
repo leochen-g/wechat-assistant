@@ -1,4 +1,4 @@
-getToday = () => { // 获取今天日期
+const getToday = () => { // 获取今天日期
     const date = new Date()
     let year = date.getFullYear()
     let month = date.getMonth() + 1
@@ -6,12 +6,12 @@ getToday = () => { // 获取今天日期
     return year + '-' + month + '-' + day + ' '
 }
 
-convertTime = (time) => { // 转换定时格式
+const convertTime = (time) => { // 转换定时格式
     let array = time.split(':')
     return "0 " + array[1] + ' ' + array[0] + ' * * *'
 }
 
-contentDistinguish = (contact, keywordArray) => {
+const contentDistinguish = (contact, keywordArray) => {
     let scheduleObj = {}
     let today = getToday()
     scheduleObj.setter = contact.name() // 设置定时任务的用户

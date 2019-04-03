@@ -1,6 +1,6 @@
 const superagent = require('superagent')
 
-request = (url, method, params, data, cookies) => {
+const request = (url, method, params, data, cookies) => {
     return new Promise((resolve, reject) => {
         superagent(method, url)
             .query(params)

@@ -7,7 +7,7 @@ const untils = require('./untils/index')
 const host = 'http://127.0.0.1:3008/api'
 
 // 每次登录初始化定时任务
-initSchedule = async(list) => {
+const initSchedule = async(list) => {
     try {
         for (item of list) {
             let time = item.isLoop ? item.time : new Date(item.time)
@@ -30,14 +30,14 @@ initSchedule = async(list) => {
 }
 
 // 二维码生成
-onScan = (qrcode, status) => {
+const onScan = (qrcode, status) => {
     Qrterminal.generate(qrcode)
     const qrImgUrl = ['https://api.qrserver.com/v1/create-qr-code/?data=', encodeURIComponent(qrcode)].join('')
     console.log(qrImgUrl)
 }
 
 // 登录事件
-onLogin = async(user) => {
+const onLogin = async(user) => {
     console.log(`贴心助理${user}登录了`)
     request(host + '/getScheduleList', 'GET').then((res) => {
         let text = JSON.parse(res.text)
@@ -50,12 +50,12 @@ onLogin = async(user) => {
 }
 
 // 登出事件
-onLogout = (user) => {
+const onLogout = (user) => {
     console.log(`${user} 登出了`)
 }
 
 // 消息监听
-onMessage = async(msg) => {
+const onMessage = async(msg) => {
     const contact = msg.from()
     const content = msg.text()
     const room = msg.room()
@@ -79,7 +79,7 @@ onMessage = async(msg) => {
 }
 
 // 添加定时提醒
-addSchedule = async(obj) => {
+const addSchedule = async(obj) => {
     request(host + '/addSchedule', 'POST', '', obj).then(async(res) => {
         res = JSON.parse(res.text)
         let nickName = res.data.subscribe
@@ -104,7 +104,7 @@ addSchedule = async(obj) => {
 }
 
 // 自动加好友
-onFriendShip = async(friendship) => {
+const onFriendShip = async(friendship) => {
     let logMsg
     try {
         logMsg = '添加好友' + friendship.contact().name()
