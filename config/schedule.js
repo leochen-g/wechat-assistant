@@ -1,5 +1,5 @@
 const schedule = require('node-schedule')
-    // date 参数
+// date 参数
 
 //其他规则见 https://www.npmjs.com/package/node-schedule
 // 规则参数讲解    *代表通配符
@@ -25,8 +25,8 @@ const schedule = require('node-schedule')
 // 每周1的1点1分30秒触发 ：'30 1 1 * * 1'
 
 const setSchedule = (date, callback) => {
-    schedule.scheduleJob(date, callback)
+  schedule.scheduleJob(date, callback)
 }
 module.exports = {
-    setSchedule
+  setSchedule
 }
