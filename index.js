@@ -59,6 +59,7 @@ onMessage = async(msg) => {
     const contact = msg.from()
     const content = msg.text()
     const room = msg.room()
+    const meiri = await bot.Room.find({ topic: '微信每日说' })
     if (msg.self()) return
     if (room) {
         const roomName = await room.topic()
@@ -68,12 +69,22 @@ onMessage = async(msg) => {
 
         let keywordArray = content.replace(/\s+/g, ' ').split(" ") // 把多个空格替换成一个空格，并使用空格作为标记，拆分关键词
         console.log("分词后效果", keywordArray)
-        if (keywordArray[0] === "提醒") {
+        if (content.indexOf('加群') > -1) {
+            if (meiri) {
+                try {
+                    await meiri.add(contact)
+                } catch (e) {
+                    console.error(e)
+                }
+            }
+        } else if (keywordArray[0] === "提醒") {
             let scheduleObj = untils.contentDistinguish(contact, keywordArray)
             addSchedule(scheduleObj)
             contact.say('小助手已经把你的提醒牢记在小本本上了')
-        } else if (content && content.indexOf('你好') > -1) {
+        } else if (content && (content.indexOf('你好') > -1)) {
             contact.say('你好，很高兴成为你的小秘书，来试试我的新功能吧！回复案例：“提醒 我 18:30 下班回家”，创建你的专属提醒，记得关键词之间使用空格分隔开')
+        } else {
+            contact.say('1、回复关键词“加群”<br>2、或回复“提醒 我 18:30 下班回家”，创建你的专属提醒<br>3、主人最新文章:《koa+mongodb打造掘金关注者分析面板》https://juejin.im/post/5cdac2dff265da0354032e8a<br>更多功能查看<a href="https://juejin.im/post/5ca1dd846fb9a05e6c77b72f">https://juejin.im/post/5ca1dd846fb9a05e6c77b72f</a>')
         }
     }
 }
