@@ -5,6 +5,26 @@ const Qrterminal = require('qrcode-terminal')
 const { request } = require('./config/superagent')
 const untils = require('./untils/index')
 const host = 'http://127.0.0.1:3008/api'
+const day = require('./config/day')
+
+// 微信每日说配置
+initDay = async() => {
+    let logMsg
+    let contact = await bot.Contact.find({ name: day.NICKNAME }) || await bot.Contact.find({ alias: day.NAME }) // 获取你要发送的联系人
+    let one = await untils.getOne() //获取每日一句
+    let weather = await untils.getWeather() //获取天气信息
+    let today = await untils.formatDate(new Date()) //获取今天的日期
+    let memorialDay = untils.getDay(day.MEMORIAL_DAY) //获取纪念日天数
+    let str = today + '<br>我们在一起的第' + memorialDay + '天<br>' + '<br>元气满满的一天开始啦,要开心噢^_^<br>' +
+        '<br>今日天气<br>' + weather.weatherTips + '<br>' + weather.todayWeather + '<br>每日一句:<br>' + one + '<br><br>' + '————————最爱你的我'
+    try {
+        logMsg = str
+        await contact.say(str) // 发送消息
+    } catch (e) {
+        logMsg = e.message
+    }
+    console.log(logMsg)
+}
 
 // 每次登录初始化定时任务
 initSchedule = async(list) => {
@@ -24,6 +44,11 @@ initSchedule = async(list) => {
                 }
             })
         }
+        // 登陆后初始化微信每日说
+        schedule.setSchedule(day.SENDDATE, async() => {
+            console.log('微信每日说开始工作了！')
+            initDay()
+        })
     } catch (err) {
         console.log('初始化定时任务失败', err)
     }
@@ -36,7 +61,7 @@ onScan = (qrcode, status) => {
     console.log(qrImgUrl)
 }
 
-// 登录事件
+// 登录事件·
 onLogin = async(user) => {
     console.log(`贴心助理${user}登录了`)
     request(host + '/getScheduleList', 'GET').then((res) => {
@@ -145,12 +170,26 @@ onFriendShip = async(friendship) => {
     }
     console.log(logMsg)
 }
+
+// 加群提醒
+function roomJoin(room, inviteeList, inviter) {
+    const nameList = inviteeList.map(c => c.name()).join(',')
+    room.topic().then(function(res) {
+        const roomNameReg = eval(day.ROOMNAME)
+        if (roomNameReg.test(res)) {
+            console.log(`群名： ${res} ，加入新成员： ${nameList}, 邀请人： ${inviter}`)
+            room.say(`${res}：欢迎新朋友 @${nameList}，<br>使用过程中有什么问题都可以在群里提出`)
+        }
+    })
+}
+
 const bot = new Wechaty({ name: 'WechatEveryDay' })
 bot.on('scan', onScan)
 bot.on('login', onLogin)
 bot.on('logout', onLogout)
 bot.on('message', onMessage)
 bot.on('friendship', onFriendShip)
+bot.on('room-join', roomJoin)
 bot.start()
     .then(() => { console.log('开始登陆微信') })
     .catch(e => console.error(e))

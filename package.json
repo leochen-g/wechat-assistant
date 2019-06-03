@@ -10,8 +10,16 @@
     },
     "author": "Leo_chen",
     "license": "MIT",
-    "keywords": ["koa", "mongodb", "wechaty", "mongoose", "微信机器人", "微信助手"],
+    "keywords": [
+        "koa",
+        "mongodb",
+        "wechaty",
+        "mongoose",
+        "微信机器人",
+        "微信助手"
+    ],
     "dependencies": {
+        "cheerio": "^1.0.0-rc.3",
         "file-box": "^0.8.27",
         "koa": "^2.7.0",
         "koa-bodyparser": "^4.2.1",
