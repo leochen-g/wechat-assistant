@@ -135,7 +135,7 @@ addSchedule = async(obj) => {
         schedule.setSchedule(Rule1, async() => {
             console.log('你的专属提醒开启啦！')
             await contact.say(content)
-            if (!res.isLoop) {
+            if (!res.data.isLoop) {
                 request(host + '/updateSchedule', 'POST', '', { id: res.data._id }).then((result) => {
                     console.log('更新定时任务成功')
                 }).catch(err => {
