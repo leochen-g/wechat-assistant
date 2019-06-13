@@ -163,6 +163,7 @@ onFriendShip = async(friendship) => {
              * and accept this request by `request.accept()`
              */
             case Friendship.Type.Receive:
+
                 await friendship.accept()
                 break
                 /**
