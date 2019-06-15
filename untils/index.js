@@ -32,16 +32,6 @@ async function getWeather() { //获取墨迹天气
     return obj
 }
 
-async function getReply(word) { // 青云api，智能聊天机器人
-    let url = config.AIBOTAPI
-    let res = await superagent.request(url, 'GET', { key: config.APIKEY, info: word })
-    let content = JSON.parse(res.text)
-    if (content.code === 100000) {
-        return content.text
-    } else {
-        return '我好像迷失在无边的网络中了，你能找回我么'
-    }
-}
 
 function getDay(date) {
     var date2 = new Date();
@@ -123,6 +113,17 @@ contentDistinguish = (contact, keywordArray) => {
         scheduleObj.content = (scheduleObj.setter === scheduleObj.subscribe) ? scheduleObj.content = "亲爱的" + scheduleObj.subscribe + "，温馨提醒：" + keywordArray[3].replace('我', '你') : "亲爱的" + scheduleObj.subscribe + "，" + scheduleObj.setter + "委托我提醒你，" + keywordArray[3].replace('我', '你')
     }
     return scheduleObj
+}
+async function getReply(word) { // 天行聊天机器人
+    let url = config.AIBOTAPI
+    let res = await superagent.request(url, 'GET', { key: config.APIKEY, question: word, })
+    let content = JSON.parse(res.text)
+    if (content.code === 200) {
+        console.log(content)
+        return content.newslist[0].reply
+    } else {
+        return '我好像迷失在无边的网络中了，你能找回我么'
+    }
 }
 module.exports = {
     getToday,
