@@ -109,12 +109,30 @@ onMessage = async(msg) => {
         } else if (keywordArray[0] === "提醒") {
             if (keywordArray.length > 3) {
                 let scheduleObj = untils.contentDistinguish(contact, keywordArray)
-                addSchedule(scheduleObj)
-                await delay(2000)
-                contact.say('小助手已经把你的提醒牢记在小本本上了')
+                if (keywordArray[2] === '每天') {
+                    if (keywordArray[3].indexOf(':') > -1 || keywordArray[3].indexOf('：') > -1) {
+                        addSchedule(scheduleObj)
+                        await delay(2000)
+                        contact.say('小助手已经把你的提醒牢记在小本本上了')
+                    } else {
+                        await delay(2000)
+                        contact.say('每日提醒设置失败，请保证每个关键词之间使用空格分割开。正确格式为：“提醒(空格)我(空格)每天(空格)18:30(空格)下班回家”')
+                    }
+                } else {
+                    console.log('日期格式', scheduleObj.time, '结果', untils.isRealDate(scheduleObj.time))
+                    let isTime = untils.isRealDate(scheduleObj.time)
+                    if (isTime) {
+                        addSchedule(scheduleObj)
+                        await delay(2000)
+                        contact.say('小助手已经把你的提醒牢记在小本本上了')
+                    } else {
+                        await delay(2000)
+                        contact.say('提醒设置失败，请保证每个关键词之间使用空格分割开，并保证日期格式正确。正确格式为：“提醒(空格)我(空格)18:30(空格)下班回家”')
+                    }
+                }
             } else {
                 await delay(2000)
-                contact.say('提醒设置失败，请保证每个关键词之间使用空格分割开。正确格式为：“提醒(空格)我(空格)18:30(空格)下班回家”')
+                contact.say('提醒设置失败，请保证每个关键词之间使用空格分割开，并保证日期格式正确。正确格式为：“提醒(空格)我(空格)18:30(空格)下班回家”')
             }
         } else if (content && (content.indexOf('你好') > -1)) {
             await delay(2000)

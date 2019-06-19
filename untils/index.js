@@ -120,10 +120,32 @@ async function getReply(word) { // 天行聊天机器人
     let content = JSON.parse(res.text)
     if (content.code === 200) {
         console.log(content)
-        return content.newslist[0].reply
+        let response = ''
+        if (content.datatype === 'text') {
+            response = content.newslist[0].reply.replace('{robotname}', '小助手').replace('{appellation}', '小主')
+        } else if (content.datatype === 'view') {
+            response = '虽然我不太懂你说的是什么，但是感觉很高级的样子，因此我也查找了类似的文章去学习，你觉得有用吗<br>' + '《' + content.newslist[0].title + '》' + content.newslist[0].url
+        } else {
+            response = '你太厉害了，说的话把我难倒了，我要去学习了，不然没法回答你的问题'
+        }
+        return response
     } else {
         return '我好像迷失在无边的网络中了，你能找回我么'
     }
+}
+// 判断日期时间格式是否正确
+function isRealDate(str) {
+    var reg = /^(\d+)-(\d{1,2})-(\d{1,2}) (\d{1,2}):(\d{1,2})$/;
+    var r = str.match(reg);
+    if (r == null) return false;
+    r[2] = r[2] - 1;
+    var d = new Date(r[1], r[2], r[3], r[4], r[5]);
+    if (d.getFullYear() != r[1]) return false;
+    if (d.getMonth() != r[2]) return false;
+    if (d.getDate() != r[3]) return false;
+    if (d.getHours() != r[4]) return false;
+    if (d.getMinutes() != r[5]) return false;
+    return true;
 }
 module.exports = {
     getToday,
@@ -133,5 +155,6 @@ module.exports = {
     formatDate,
     getOne,
     getWeather,
-    getReply
+    getReply,
+    isRealDate
 }
