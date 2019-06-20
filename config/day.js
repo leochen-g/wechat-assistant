@@ -11,6 +11,6 @@ module.exports = {
     MOJI_HOST: 'https://tianqi.moji.com/weather/china/', //中国墨迹天气url
     ROOMNAME: '/^微信每日说/i', //群名(请只修改中文，不要删除符号，这是正则)
     AIBOTAPI: 'http://api.tianapi.com/txapi/robot/', //天行机器人API 注册地址https://www.tianapi.com/signup.html?source=474284281
-    APIKEY: '天行机器人apikey', //天行机器人apikey
+    APIKEY: '762be789103e1ae7b65573f8d4fc0df6', //天行机器人apikey
     AUTOREPLY: false
 }

@@ -95,7 +95,12 @@ onMessage = async(msg) => {
 
         let keywordArray = content.replace(/\s+/g, ' ').split(" ") // 把多个空格替换成一个空格，并使用空格作为标记，拆分关键词
         console.log("分词后效果", keywordArray)
-        if (content.indexOf('加群') > -1 || content.indexOf('微信每日说') > -1) {
+        if (content.indexOf('开启了朋友验证') > -1 || contact.name() === '朋友推荐消息') { // 防止重复发送消息
+            console.log('无需回复')
+        } else if (content.indexOf('你已添加') > -1) { // 初始添加好友后提醒
+            await delay(2000)
+            contact.say('1、回复关键词“加群”<br>2、或回复“提醒 我 18:30 下班回家”，创建你的专属提醒<br>3、如试用过程中遇到问题，可回复关键词“联系作者”添加作者微信，此账号为机器人小号，不做任何回复<br>4、作者最新文章:《koa+mongodb打造掘金关注者分析面板》https://juejin.im/post/5cdac2dff265da0354032e8a<br>更多功能查看<a href="https://juejin.im/post/5ca1dd846fb9a05e6c77b72f">https://juejin.im/post/5ca1dd846fb9a05e6c77b72f</a>')
+        } else if (content.indexOf('加群') > -1 || content.indexOf('微信每日说') > -1) {
             if (meiri) {
                 try {
                     await delay(2000)
