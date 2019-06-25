@@ -7,7 +7,7 @@ request = (url, method, params, data, cookies) => {
             .send(data)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .end((err, res) => {
-                if (err) reject(errr)
+                if (err) reject(err)
                 resolve(res)
             })
     })
