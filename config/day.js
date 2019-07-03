@@ -11,6 +11,9 @@ module.exports = {
     MOJI_HOST: 'https://tianqi.moji.com/weather/china/', //中国墨迹天气url
     ROOMNAME: '/^微信每日说/i', //群名(请只修改中文，不要删除符号，这是正则)
     AIBOTAPI: 'http://api.tianapi.com/txapi/robot/', //天行机器人API 注册地址https://www.tianapi.com/signup.html?source=474284281
-    APIKEY: '762be789103e1ae7b65573f8d4fc0df6', //天行机器人apikey
-    AUTOREPLY: false
+    AIBOTTULING: 'http://api.tianapi.com/txapi/tuling/', // 天行对接的图灵机器人接口
+    APIKEY: '762be789103e1ae7b65573f8d4fc0df6', //天行机器人apikey，免费提供
+    TULINGKEY: '加群获取', // 天行对接的图灵机器人，众筹获取，具体详情加小助手后询问
+    DEFAULTBOT: '0', // 默认机器人 0 天行机器人 1 天行对接的图灵机器人
+    AUTOREPLY: false // 是否设置机器人自动回复
 }

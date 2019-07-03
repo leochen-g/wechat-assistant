@@ -1,6 +1,7 @@
 const superagent = require('../config/superagent')
 const config = require('../config/day')
 const cheerio = require('cheerio')
+const {machineIdSync} = require('node-machine-id')
 
 async function getOne() { // 获取每日一句
     let res = await superagent.request(config.ONE, 'GET')
@@ -114,9 +115,24 @@ contentDistinguish = (contact, keywordArray) => {
     }
     return scheduleObj
 }
+
+async function getTuLingReply(word){ // 图灵聊天机器人
+  let uniqueId = machineIdSync() // 获取机器唯一识别码，方便机器人上下文关联
+  let url = config.AIBOTTULING
+  let res = await superagent.request(url, 'GET', {key: config.TULINGKEY,question: word, userid: uniqueId})
+  let content = JSON.parse(res.text)
+  if (content.code === 200) {
+    console.log('图灵',content)
+    let response = content.newslist[0].reply
+    return response
+} else {
+    return '我好像迷失在无边的网络中了，接口调用错误：'+ content.msg
+}
+}
+
 async function getReply(word) { // 天行聊天机器人
     let url = config.AIBOTAPI
-    let res = await superagent.request(url, 'GET', { key: config.APIKEY, question: word, })
+    let res = await superagent.request(url, 'GET', { key: config.APIKEY, question: word})
     let content = JSON.parse(res.text)
     if (content.code === 200) {
         console.log(content)
@@ -156,5 +172,6 @@ module.exports = {
     getOne,
     getWeather,
     getReply,
+    getTuLingReply,
     isRealDate
 }
