@@ -91,7 +91,7 @@ onMessage = async(msg) => {
         const roomName = await room.topic()
         console.log(`群名: ${roomName} 发消息人: ${contact.name()} 内容: ${content}`)
         let replyRoom
-        if (topic == "微信每日说" && content.indexOf('@小助手') > -1) {
+        if (roomName == "微信每日说" && content.indexOf('@小助手') > -1) {
           if(day.DEFAULTBOT=='0'){
             replyRoom = await untils.getReply(content)
             console.log('天行机器人回复：', replyRoom)
