@@ -166,11 +166,12 @@ onMessage = async(msg) => {
             contact.say('1、回复关键词“加群”<br>2、或回复“提醒 我 18:30 下班回家”，创建你的专属提醒<br>3、如试用过程中遇到问题，可回复关键词“联系作者”添加作者微信，此账号为机器人小号，不做任何回复<br>4、作者最新文章:《koa+mongodb打造掘金关注者分析面板》https://juejin.im/post/5cdac2dff265da0354032e8a<br>更多功能查看<a href="https://juejin.im/post/5ca1dd846fb9a05e6c77b72f">https://juejin.im/post/5ca1dd846fb9a05e6c77b72f</a>')
         } else {
             if (day.AUTOREPLY) {
+				let reply
               if(day.DEFAULTBOT=='0'){
-                let reply = await untils.getReply(content)
+                reply = await untils.getReply(content)
                 console.log('天行机器人回复：', reply)
               }else if(day.DEFAULTBOT=='1'){
-                let reply = await untils.getTuLingReply(content)
+                reply = await untils.getTuLingReply(content)
                 console.log('图灵机器人回复：', reply)
               }
                 try {
