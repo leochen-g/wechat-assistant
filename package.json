@@ -31,6 +31,7 @@
         "wechaty": "^0.27.16"
     },
     "devDependencies": {
+        "crypto": "^1.0.1",
         "node-machine-id": "^1.1.12"
     }
 }
