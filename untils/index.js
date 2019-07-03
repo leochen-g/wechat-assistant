@@ -4,6 +4,7 @@ const cheerio = require('cheerio')
 const {machineIdSync} = require('node-machine-id')
 const crypto = require('crypto')
 let md5 = crypto.createHash('md5');
+let uniqueId =md5.update(machineIdSync()).digest('hex') // 获取机器唯一识别码并MD5，方便机器人上下文关联
 async function getOne() { // 获取每日一句
     let res = await superagent.request(config.ONE, 'GET')
     let $ = cheerio.load(res.text)
@@ -118,7 +119,6 @@ contentDistinguish = (contact, keywordArray) => {
 }
 
 async function getTuLingReply(word){ // 图灵聊天机器人
-  let uniqueId =md5.update(machineIdSync()).digest('hex') // 获取机器唯一识别码并MD5，方便机器人上下文关联
   console.log('uniqueId',uniqueId)
   let url = config.AIBOTTULING
   let res = await superagent.request(url, 'GET', {key: config.TULINGKEY,question: word, userid: uniqueId})
