@@ -92,11 +92,12 @@ onMessage = async(msg) => {
         console.log(`群名: ${roomName} 发消息人: ${contact.name()} 内容: ${content}`)
         let replyRoom
         if (roomName == "微信每日说" && content.indexOf('@小助手') > -1) {
+			let roomContent = content.replace('@小助手','')
           if(day.DEFAULTBOT=='0'){
-            replyRoom = await untils.getReply(content)
+            replyRoom = await untils.getReply(roomContent)
             console.log('天行机器人回复：', replyRoom)
           }else if(day.DEFAULTBOT=='1'){
-            replyRoom = await untils.getTuLingReply(content)
+            replyRoom = await untils.getTuLingReply(roomContent)
             console.log('图灵机器人回复：', replyRoom)
           }else {
             replyRoom = '你好啊！有什么事情可以直接找群主的，我只是一个小助手，没法解决你的问题'
