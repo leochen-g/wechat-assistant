@@ -5,6 +5,7 @@ const {machineIdSync} = require('node-machine-id')
 const crypto = require('crypto')
 let md5 = crypto.createHash('md5');
 let uniqueId =md5.update(machineIdSync()).digest('hex') // 获取机器唯一识别码并MD5，方便机器人上下文关联
+
 async function getOne() { // 获取每日一句
     let res = await superagent.request(config.ONE, 'GET')
     let $ = cheerio.load(res.text)
@@ -151,6 +152,32 @@ async function getReply(word) { // 天行聊天机器人
         return '我好像迷失在无边的网络中了，你能找回我么'
     }
 }
+/**
+ * 获取垃圾分类结果
+ * @param {String} word 垃圾名称
+ */
+async function getRubbishType(word) {
+  let url = config.TXRUBBISH
+  let res = await superagent.request(url,'GET',{key:config.APIKEY,word:word})
+  let content = JSON.parse(res.text)
+  if (content.code === 200) {
+    let type
+  if(content.newslist[0].type == 0){
+    type = '是可回收垃圾'
+  }else if(content.newslist[0].type == 1){
+    type = '是有害垃圾'
+  }else if(content.newslist[0].type == 2){
+    type = '是厨余(湿)垃圾'
+  }else if(content.newslist[0].type == 3){
+    type = '是其他(干)垃圾'
+  }
+  let response = `${content.newslist[0].name}${type}<br>【解释】${content.newslist[0].explain}<br>【主要包括】${content.newslist[0].contain}<br>【投放提示】${content.newslist[0].tip}`
+  return response
+} else {
+     console.log('查询失败提示：', content.msg)
+    return '暂时还没找到这个分类信息呢'
+}  
+}
 // 判断日期时间格式是否正确
 function isRealDate(str) {
     var reg = /^(\d+)-(\d{1,2})-(\d{1,2}) (\d{1,2}):(\d{1,2})$/;
@@ -175,5 +202,6 @@ module.exports = {
     getWeather,
     getReply,
     getTuLingReply,
-    isRealDate
+    isRealDate,
+    getRubbishType
 }

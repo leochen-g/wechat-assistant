@@ -3,7 +3,7 @@ const schedule = require('./config/schedule')
 const { FileBox } = require('file-box')
 const Qrterminal = require('qrcode-terminal')
 const { request } = require('./config/superagent')
-const untils = require('./untils/index')
+const utils = require('./utils/index')
 const host = 'http://127.0.0.1:3008/api'
 const day = require('./config/day')
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -12,10 +12,10 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 initDay = async() => {
     let logMsg
     let contact = await bot.Contact.find({ name: day.NICKNAME }) || await bot.Contact.find({ alias: day.NAME }) // 获取你要发送的联系人
-    let one = await untils.getOne() //获取每日一句
-    let weather = await untils.getWeather() //获取天气信息
-    let today = await untils.formatDate(new Date()) //获取今天的日期
-    let memorialDay = untils.getDay(day.MEMORIAL_DAY) //获取纪念日天数
+    let one = await utils.getOne() //获取每日一句
+    let weather = await utils.getWeather() //获取天气信息
+    let today = await utils.formatDate(new Date()) //获取今天的日期
+    let memorialDay = utils.getDay(day.MEMORIAL_DAY) //获取纪念日天数
     let str = today + '<br>我们在一起的第' + memorialDay + '天<br>' + '<br>元气满满的一天开始啦,要开心噢^_^<br>' +
         '<br>今日天气<br>' + weather.weatherTips + '<br>' + weather.todayWeather + '<br>每日一句:<br>' + one + '<br><br>' + '————————最爱你的我'
     try {
@@ -94,10 +94,10 @@ onMessage = async(msg) => {
         if (roomName == "微信每日说" && content.indexOf('@小助手') > -1) {
 			let roomContent = content.replace('@小助手','')
           if(day.DEFAULTBOT=='0'){
-            replyRoom = await untils.getReply(roomContent)
+            replyRoom = await utils.getReply(roomContent)
             console.log('天行机器人回复：', replyRoom)
           }else if(day.DEFAULTBOT=='1'){
-            replyRoom = await untils.getTuLingReply(roomContent)
+            replyRoom = await utils.getTuLingReply(roomContent)
             console.log('图灵机器人回复：', replyRoom)
           }else {
             replyRoom = '你好啊！有什么事情可以直接找群主的，我只是一个小助手，没法解决你的问题'
@@ -127,7 +127,7 @@ onMessage = async(msg) => {
             }
         } else if (keywordArray[0] === "提醒") {
             if (keywordArray.length > 3) {
-                let scheduleObj = untils.contentDistinguish(contact, keywordArray)
+                let scheduleObj = utils.contentDistinguish(contact, keywordArray)
                 if (keywordArray[2] === '每天') {
                     if (keywordArray[3].indexOf(':') > -1 || keywordArray[3].indexOf('：') > -1) {
                         addSchedule(scheduleObj)
@@ -138,8 +138,8 @@ onMessage = async(msg) => {
                         contact.say('每日提醒设置失败，请保证每个关键词之间使用空格分割开。正确格式为：“提醒(空格)我(空格)每天(空格)18:30(空格)下班回家”')
                     }
                 } else {
-                    console.log('日期格式', scheduleObj.time, '结果', untils.isRealDate(scheduleObj.time))
-                    let isTime = untils.isRealDate(scheduleObj.time)
+                    console.log('日期格式', scheduleObj.time, '结果', utils.isRealDate(scheduleObj.time))
+                    let isTime = utils.isRealDate(scheduleObj.time)
                     if (isTime) {
                         addSchedule(scheduleObj)
                         await delay(2000)
@@ -165,14 +165,20 @@ onMessage = async(msg) => {
         } else if (content && (content.indexOf('帮助') > -1)) {
             await delay(2000)
             contact.say('1、回复关键词“加群”<br>2、或回复“提醒 我 18:30 下班回家”，创建你的专属提醒<br>3、如试用过程中遇到问题，可回复关键词“联系作者”添加作者微信，此账号为机器人小号，不做任何回复<br>4、作者最新文章:《koa+mongodb打造掘金关注者分析面板》https://juejin.im/post/5cdac2dff265da0354032e8a<br>更多功能查看<a href="https://juejin.im/post/5ca1dd846fb9a05e6c77b72f">https://juejin.im/post/5ca1dd846fb9a05e6c77b72f</a>')
-        } else {
+        } else if(content.substr(0,1)=='?'||content.substr(0,1)=='？'){ //垃圾分类
+          let contactContent = content.replace('?','').replace('？','')
+          let res = await utils.getRubbishType(contactContent)
+          console.log('垃圾分类结果',res)
+          await delay(2000)
+          await contact.say(res)
+        } else{
             if (day.AUTOREPLY) {
-				let reply
+				      let reply
               if(day.DEFAULTBOT=='0'){
-                reply = await untils.getReply(content)
+                reply = await utils.getReply(content)
                 console.log('天行机器人回复：', reply)
               }else if(day.DEFAULTBOT=='1'){
-                reply = await untils.getTuLingReply(content)
+                reply = await utils.getTuLingReply(content)
                 console.log('图灵机器人回复：', reply)
               }
                 try {
