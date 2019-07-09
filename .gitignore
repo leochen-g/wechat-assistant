@@ -16,3 +16,7 @@
 .env
 *.memory-card.json
 package-lock.json
+# Runtime data
+pids
+*.pid
+*.seed

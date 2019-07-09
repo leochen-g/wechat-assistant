@@ -1,12 +1,26 @@
 const cheerio = require('cheerio');
 const http = require('./superagent');
 const apiConfig = require('./config');
-const config = require('../config/day');
+const config = require('../../bin/day');
 const { machineIdSync } = require('node-machine-id');
 const crypto = require('crypto');
 let md5 = crypto.createHash('md5');
 let uniqueId = md5.update(machineIdSync()).digest('hex'); // 获取机器唯一识别码并MD5，方便机器人上下文关联
 
+/**
+ * 获取定时任务列表
+ */
+async function getScheduleList () {
+  try {
+    let res = await http.req(apiConfig.KOAHOST + '/getScheduleList', 'GET')
+    let text = JSON.parse(res.text);
+    let scheduleList = text.data;
+    return scheduleList
+  } catch (error) {
+    console.log('获取定时任务失败:'+error)
+  }
+  
+}
 /**
  * 获取每日一句
  */
@@ -101,7 +115,7 @@ async function getResByTXTL(word) {
  */
 async function getResByTX(word) { 
   let url = apiConfig.TXBOT
-  let res = await http.req(url, 'GET', { key: config.APIKEY, question: word, userid: uniqueId})
+  let res = await http.req(url, 'GET', { key: apiConfig.APIKEY, question: word, userid: uniqueId})
   let content = JSON.parse(res.text)
   if (content.code === 200) {
       let response = ''
@@ -139,7 +153,7 @@ async function getResByTL(word) {
  */
 async function getRubbishType (word) {
   let url = apiConfig.TXRUBBISH
-  let res = await http.req(url,'GET',{key:config.APIKEY,word:word})
+  let res = await http.req(url,'GET',{key:apiConfig.APIKEY,word:word})
   let content = JSON.parse(res.text)
   if (content.code === 200) {
     let type
@@ -166,7 +180,7 @@ async function getRubbishType (word) {
 async function getSweetWord() { 
   let url = apiConfig.TXLOVE
   try {
-      let res = await http.req(url, 'GET', { key: config.APIKEY })
+      let res = await http.req(url, 'GET', { key: apiConfig.APIKEY })
       let content = JSON.parse(res.text)
       if (content.code === 200) {
           let sweet = content.newslist[0].content
@@ -186,7 +200,7 @@ async function getSweetWord() {
 async function getTXweather() {
   let url = apiConfig.TXWEATHER
   try {
-      let res = await http.req(url, 'GET', { key: config.APIKEY, city: config.CITY })
+      let res = await http.req(url, 'GET', { key: apiConfig.APIKEY, city: config.CITY })
       let content = JSON.parse(res.text)
       if (content.code === 200) {
           let todayInfo = content.newslist[0]
@@ -214,4 +228,5 @@ module.exports = {
   getTXweather,
   getRubbishType,
   getSweetWord,
+  getScheduleList
 }

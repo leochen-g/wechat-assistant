@@ -1,11 +1,11 @@
 const { Wechaty, Friendship, config, log } = require('wechaty')
-const schedule = require('./config/schedule')
+const schedule = require('./bin/schedule')
 const { FileBox } = require('file-box')
 const Qrterminal = require('qrcode-terminal')
-const { req } = require('./http/superagent')
-const utils = require('./utils/index')
+const { req } = require('../proxy/superagent')
+const utils = require('../lib/index')
 const host = 'http://127.0.0.1:3008/api'
-const day = require('./config/day')
+const day = require('../bin/day')
 
 // 微信每日说配置
 initDay = async() => {
