@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 const http = require('./superagent');
 const apiConfig = require('./config');
-const config = require('../../bin/day');
+const config = require('../../wechat.config');
 const { machineIdSync } = require('node-machine-id');
 const crypto = require('crypto');
 let md5 = crypto.createHash('md5');
@@ -19,7 +19,17 @@ async function getScheduleList () {
   } catch (error) {
     console.log('获取定时任务失败:'+error)
   }
-  
+}
+/**
+ * 更新定时任务
+ */
+async function updateSchedule (id) {
+  try {
+    let res = await http.req(apiConfig.KOAHOST + '/updateSchedule', 'POST','', { id: id })
+    console.log('更新定时任务成功')
+  } catch (error) {
+    console.log('更新定时任务失败',error)
+  }
 }
 /**
  * 获取每日一句
@@ -35,59 +45,6 @@ async function getOne() {
   return todayOne;
 }
 
-/**
- * 获取墨迹天气
- */
-async function getMJWeather() {
-  let url = apiConfig.MOJI + config.CITY + '/' + config.LOCATION;
-  let res = await http.req(url, 'GET');
-  let $ = cheerio.load(res.text);
-  let weatherTips = $('.wea_tips em').text();
-  const today = $('.forecast .days')
-    .first()
-    .find('li');
-  let todayInfo = {
-    Day: $(today[0])
-      .text()
-      .replace(/(^\s*)|(\s*$)/g, ''),
-    WeatherText: $(today[1])
-      .text()
-      .replace(/(^\s*)|(\s*$)/g, ''),
-    Temp: $(today[2])
-      .text()
-      .replace(/(^\s*)|(\s*$)/g, ''),
-    Wind: $(today[3])
-      .find('em')
-      .text()
-      .replace(/(^\s*)|(\s*$)/g, ''),
-    WindLevel: $(today[3])
-      .find('b')
-      .text()
-      .replace(/(^\s*)|(\s*$)/g, ''),
-    PollutionLevel: $(today[4])
-      .find('strong')
-      .text()
-      .replace(/(^\s*)|(\s*$)/g, '')
-  };
-  let obj = {
-    weatherTips: weatherTips,
-    todayWeather:
-      todayInfo.Day +
-      ':' +
-      todayInfo.WeatherText +
-      '<br>' +
-      '温度:' +
-      todayInfo.Temp +
-      '<br>' +
-      todayInfo.Wind +
-      todayInfo.WindLevel +
-      '<br>' +
-      '空气:' +
-      todayInfo.PollutionLevel +
-      '<br>'
-  };
-  return obj;
-}
 
 /**
  * 天行图灵聊天机器人
@@ -197,10 +154,10 @@ async function getSweetWord() {
 /**
  * 获取天行天气
  */
-async function getTXweather() {
+async function getTXweather(city) {
   let url = apiConfig.TXWEATHER
   try {
-      let res = await http.req(url, 'GET', { key: apiConfig.APIKEY, city: config.CITY })
+      let res = await http.req(url, 'GET', { key: apiConfig.APIKEY, city: city })
       let content = JSON.parse(res.text)
       if (content.code === 200) {
           let todayInfo = content.newslist[0]
@@ -218,15 +175,36 @@ async function getTXweather() {
       console.log('获取接口失败', err)
   }
 }
-
+/**
+ * 获取每日新闻内容
+ * @param {*} id 新闻频道对应的ID
+ */
+async function getNews(id) {
+  let url = apiConfig.TXDAYNEWS
+  try {
+    let res = await http.req(url,'GET',{key:apiConfig.APIKEY, num: 10,col: id})
+    let content = JSON.parse(res.text)
+    if(content.code === 200){
+      let newList = content.newsList
+      let news = ''
+      for(let i in newList){
+        news = `${news}<br>${i+1}.${newList[i].title}`
+      }
+      return news
+    }
+  } catch (error) {
+    console.log('获取天行新闻失败',error)
+  }
+}
 module.exports = {
   getOne,
-  getMJWeather,
   getResByTXTL,
   getResByTX,
   getResByTL,
   getTXweather,
   getRubbishType,
   getSweetWord,
-  getScheduleList
+  getScheduleList,
+  updateSchedule,
+  getNews
 }

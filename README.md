@@ -135,3 +135,9 @@ github:[https://github.com/gengchen528/wechat-assistant](https://github.com/geng
 另外我的公众号已经接入微软小冰，关注后发语音会有小姐姐的声音陪你聊天，也可以和她文字聊天，有兴趣可以试试看，单身的欢迎来撩
 
 ![](https://user-gold-cdn.xitu.io/2019/3/1/169381d277ba6401?w=258&h=258&f=png&s=42373)
+
+
+## 字典说明
+
+### sortId 新闻资讯分类
+
