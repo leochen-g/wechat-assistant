@@ -1,12 +1,8 @@
 const { Wechaty } = require('wechaty');
-// const onScan = require('./listeners/on-scan')
+const onScan = require('./listeners/on-scan')
 const onLogin = require('./listeners/on-login')
 const bot = new Wechaty({ name: 'WechatEveryDay' });
 
-let onScan = async function(user){
-  const contact = await bot.Contact.find({name: '嗯哼'})
-  console.log(contact)
-}
 
 bot.on('scan', onScan);
 bot.on('login', onLogin);

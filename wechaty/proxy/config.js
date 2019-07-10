@@ -6,10 +6,10 @@ module.exports = {
   TXHOST: 'http://api.tianapi.com/', // 天行host
   APIKEY: '762be789103e1ae7b65573f8d4fc0df6', //天行机器人apikey，免费提供
   KOAHOST: 'http://127.0.0.1:3008/api',// koa服务接口host 如果koa端口更换，此处也需更换
-  TXBOT: this.TXHOST+ 'txapi/robot/', // 天行机器人
-  TXTLBOT: this.TXHOST+ 'txapi/tuling/', // 天行图灵机器人
-  TXRUBBISH: this.TXHOST+ 'txapi/lajifenlei/',// 天行垃圾分类
-  TXLOVE: this.TXHOST+ 'txapi/saylove/', // 天行土情话
-  TXWEATHER: this.TXHOST+ 'txapi/tianqi/', // 天行天气
-  TXDAYNEWS: this.TXHOST+ 'allnews/',// 天行每日新闻
+  TXBOT: 'http://api.tianapi.com/txapi/robot/', // 天行机器人
+  TXTLBOT: 'http://api.tianapi.com/txapi/tuling/', // 天行图灵机器人
+  TXRUBBISH: 'http://api.tianapi.com/txapi/lajifenlei/',// 天行垃圾分类
+  TXLOVE: 'http://api.tianapi.com/txapi/saylove/', // 天行土情话
+  TXWEATHER: 'http://api.tianapi.com/txapi/tianqi/', // 天行天气
+  TXDAYNEWS: 'http://api.tianapi.com/allnews/',// 天行每日新闻
 } 

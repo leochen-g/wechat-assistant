@@ -185,10 +185,11 @@ async function getNews(id) {
     let res = await http.req(url,'GET',{key:apiConfig.APIKEY, num: 10,col: id})
     let content = JSON.parse(res.text)
     if(content.code === 200){
-      let newList = content.newsList
+      let newList = content.newslist
       let news = ''
       for(let i in newList){
-        news = `${news}<br>${i+1}.${newList[i].title}`
+        let num = i+1
+        news = `${news}<br>${num}.${newList[i].title}`
       }
       return news
     }
