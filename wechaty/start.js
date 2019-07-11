@@ -1,15 +1,20 @@
 const { Wechaty } = require('wechaty');
 const onScan = require('./listeners/on-scan')
 const onLogin = require('./listeners/on-login')
+const onLogout = require('./listeners/on-logout')
+const onFriend = require('./listeners/on-friend')
+const onRoomjoin = require('./listeners/on-roomjoin')
+const onMessage = require('./listeners/on-message')
+
 const bot = new Wechaty({ name: 'WechatEveryDay' });
 
 
 bot.on('scan', onScan);
 bot.on('login', onLogin);
-// bot.on('logout', './listeners/on-logout');
-// bot.on('friendship', './listeners/on-friend');
-// bot.on('room-join', './listeners/on-roomjoin');
-// bot.on('message', './listeners/on-message');
+bot.on('logout', onLogout);
+bot.on('friendship', onFriend);
+bot.on('room-join', onRoomjoin);
+bot.on('message', onMessage);
 
 
 bot

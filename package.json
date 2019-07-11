@@ -18,7 +18,9 @@
         "wechaty",
         "mongoose",
         "微信机器人",
-        "微信助手"
+        "微信助手",
+        "node",
+        "js"
     ],
     "dependencies": {
         "cheerio": "^1.0.0-rc.3",

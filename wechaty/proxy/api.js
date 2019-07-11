@@ -6,9 +6,23 @@ const { machineIdSync } = require('node-machine-id');
 const crypto = require('crypto');
 let md5 = crypto.createHash('md5');
 let uniqueId = md5.update(machineIdSync()).digest('hex'); // 获取机器唯一识别码并MD5，方便机器人上下文关联
+/**
+ * 设置定时提醒任务
+ * @param {*} obj 任务详情
+ * @returns {*} 任务详情
+ */
+async function setSchedule (obj) {
+  try {
+    let res = await http.req(apiConfig.KOAHOST + '/addSchedule','POST','',obj)
+    let content = JSON.parse(res.text)
+    return content.data
+  } catch (error) {
+    console.log('添加定时任务失败',error)
+  }
+}
 
 /**
- * 获取定时任务列表
+ * 获取定时提醒任务列表
  */
 async function getScheduleList () {
   try {
@@ -21,7 +35,7 @@ async function getScheduleList () {
   }
 }
 /**
- * 更新定时任务
+ * 更新定时提醒任务
  */
 async function updateSchedule (id) {
   try {
@@ -205,6 +219,7 @@ module.exports = {
   getTXweather,
   getRubbishType,
   getSweetWord,
+  setSchedule,
   getScheduleList,
   updateSchedule,
   getNews
