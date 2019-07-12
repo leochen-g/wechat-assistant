@@ -107,7 +107,7 @@ async function onLogin(user) {
   setTimeout(async ()=>{
     let scheduleList = []
     initSchedule(this, scheduleList,config.DAYLIST,config.ROOMLIST);
-  }, 3000)
+  }, 4000)
 }
 
 module.exports = onLogin;

@@ -1,7 +1,7 @@
 
 module.exports = {
   ONE: 'http://wufazhuce.com/', // 每日一句网址
-  TULING: 'http://www.tuling123.com/openapi/api', // 图灵api
+  TULING: 'http://openapi.tuling123.com/openapi/api/v2', // 图灵api
   MOJI: 'https://tianqi.moji.com/weather/china/', // 墨迹天气官网
   TXHOST: 'http://api.tianapi.com/', // 天行host
   APIKEY: '762be789103e1ae7b65573f8d4fc0df6', //天行机器人apikey，免费提供

@@ -115,7 +115,12 @@ function convertTime(time) {
   return '0 ' + array[1] + ' ' + array[0] + ' * * *';
 }
 
-// 判断日期时间格式是否正确
+// 
+/**
+ * 判断日期时间格式是否正确
+ * @param {*} str 日期
+ * @returns {boolean}
+ */
 function isRealDate(str) {
   var reg = /^(\d+)-(\d{1,2})-(\d{1,2}) (\d{1,2}):(\d{1,2})$/;
   var r = str.match(reg);

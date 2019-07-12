@@ -1,7 +1,7 @@
 const Koa = require("koa")
 const Router = require("koa-router")
 const bodyParser = require('koa-bodyparser')
-const model = require("../mongodb/model")
+const model = require("./mongodb/model")
 
 const app = new Koa()
 const router = new Router()
