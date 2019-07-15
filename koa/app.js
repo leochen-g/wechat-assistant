@@ -1,7 +1,7 @@
 const Koa = require("koa")
 const Router = require("koa-router")
 const bodyParser = require('koa-bodyparser')
-const model = require("../mongodb/model")
+const model = require("./mongodb/model")
 
 const app = new Koa()
 const router = new Router()
@@ -48,6 +48,4 @@ app.on('error', (err) => {
 
 app.use(router.routes())
 app.use(router.allowedMethods())
-app.listen(3008, () => {
-    console.log('route-use-middleware is starting at port 3008')
-})
+module.exports = app

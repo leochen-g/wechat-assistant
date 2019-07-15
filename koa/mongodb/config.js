@@ -1,6 +1,7 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
+const config = require('../config')
 
-const db_url = 'mongodb://localhost:27017/wechatAssitant'
+const db_url = config.mongodb_url
 let db = mongoose.connect(db_url, { useNewUrlParser: true })
 
 //连接成功

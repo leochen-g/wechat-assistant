@@ -1,11 +1,14 @@
 {
     "name": "wechat-assistant",
-    "version": "1.0.0",
-    "description": "微信小助手",
+    "version": "2.0.0",
+    "description": "微信小助手2.0",
     "main": "index.js",
     "scripts": {
-        "dev": "nodemon ./config/koa.js",
-        "start": "node ./config/koa.js | node index.js",
+        "dev": "NODE_ENV=development ./node_modules/.bin/nodemon koa/bin/www",
+        "pm2": "pm2 start koa/pm2.json",
+        "pm2-wechaty": "pm2 start wechaty/pm2.json",
+        "koa": "NODE_ENV=product node koa/bin/www",
+        "start":"node wechaty/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Leo_chen",
@@ -16,22 +19,26 @@
         "wechaty",
         "mongoose",
         "微信机器人",
-        "微信助手"
+        "微信助手",
+        "node",
+        "js"
     ],
     "dependencies": {
         "cheerio": "^1.0.0-rc.3",
+        "crypto": "^1.0.1",
+        "debug": "^4.1.1",
         "file-box": "^0.8.27",
         "koa": "^2.7.0",
         "koa-bodyparser": "^4.2.1",
         "koa-router": "^7.4.0",
         "mongoose": "^5.4.20",
+        "node-machine-id": "^1.1.12",
         "node-schedule": "^1.3.2",
         "qrcode-terminal": "^0.12.0",
         "superagent": "^5.0.2",
-        "wechaty": "^0.27.16"
+        "wechaty": "^0.26.1"
     },
     "devDependencies": {
-        "crypto": "^1.0.1",
-        "node-machine-id": "^1.1.12"
+        "nodemon": "^1.19.1"
     }
 }

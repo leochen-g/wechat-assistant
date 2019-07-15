@@ -9,6 +9,7 @@
 *.idea
 *.iml
 *.DS_Store
+*.log
 /build/
 /bin/
 *node_modules
@@ -16,3 +17,8 @@
 .env
 *.memory-card.json
 package-lock.json
+wechat.config.js
+# Runtime data
+pids
+*.pid
+*.seed
