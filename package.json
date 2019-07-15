@@ -4,11 +4,11 @@
     "description": "微信小助手2.0",
     "main": "index.js",
     "scripts": {
-        "dev": "NODE_ENV=development ./node_modules/.bin/nodemon koa/bin/www",
+        "dev": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon koa/bin/www",
         "pm2": "pm2 start koa/pm2.json",
         "pm2-wechaty": "pm2 start wechaty/pm2.json",
-        "koa": "NODE_ENV=product node koa/bin/www",
-        "start":"node wechaty/index.js",
+        "koa": "cross-env NODE_ENV=product node koa/bin/www",
+        "start": "node wechaty/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Leo_chen",
@@ -25,6 +25,7 @@
     ],
     "dependencies": {
         "cheerio": "^1.0.0-rc.3",
+        "cross-env": "^5.2.0",
         "crypto": "^1.0.1",
         "debug": "^4.1.1",
         "file-box": "^0.8.27",
