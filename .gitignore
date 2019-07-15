@@ -9,6 +9,7 @@
 *.idea
 *.iml
 *.DS_Store
+*.log
 /build/
 /bin/
 *node_modules

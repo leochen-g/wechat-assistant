@@ -12,4 +12,12 @@ module.exports = {
   TXLOVE: 'http://api.tianapi.com/txapi/saylove/', // 天行土情话
   TXWEATHER: 'http://api.tianapi.com/txapi/tianqi/', // 天行天气
   TXDAYNEWS: 'http://api.tianapi.com/allnews/',// 天行每日新闻
+  TXMINGYAN: 'http://api.tianapi.com/txapi/mingyan/',// 天行名人名言
+  TXSTAR: 'http://api.tianapi.com/txapi/star/',// 天行星座运势
+  TXXING: 'http://api.tianapi.com/txapi/surname/',// 天行姓氏起源
+  TXSKL: 'http://api.tianapi.com/txapi/skl/',// 天行顺口溜
+  TXLUNAR: 'http://api.tianapi.com/txapi/lunar/',// 天行老黄历
+  TXSHF: 'http://api.tianapi.com/txapi/godreply/',// 天行神回复
+  TXXHY: 'http://api.tianapi.com/txapi/xiehou/',// 天行歇后语
+  TXRKL: 'http://api.tianapi.com/txapi/rkl/',// 天行绕口令
 } 

@@ -51,8 +51,10 @@ async function addSchedule(that,obj) {
           api.updateSchedule(_id)
       }
     })
+    return true
   } catch (error) {
     console.log('设置定时任务失败',error)
+    return false
   } 
 }
 
@@ -85,9 +87,14 @@ async function getContactTextReply(that, contact, msg) {
       let scheduleObj = result.content
       if(scheduleObj.isLoop){
         if(scheduleObj.time){
-          await addSchedule(that,scheduleObj)
-          await lib.delay(2000)
-          contact.say('小助手已经把你的提醒牢记在小本本上了')
+          let res = await addSchedule(that,scheduleObj)
+          if(res){
+            await lib.delay(2000)
+            contact.say('小助手已经把你的提醒牢记在小本本上了')
+          }else{
+            await lib.delay(2000)
+            contact.say('添加提醒失败，请稍后重试')
+          }
         }else{
           contact.say('提醒设置失败，请保证每个关键词之间使用空格分割开，并保证日期格式正确。正确格式为：“提醒(空格)我(空格)每天(空格)18:30(空格)下班回家')
         }

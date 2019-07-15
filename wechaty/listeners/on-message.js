@@ -69,7 +69,6 @@ async function dispatchRoomFilterByMsgType(that,room, msg) {
   let reply = '';
   let contactId = contact.id
   let endTime = new Date()
-  console.log('等待', endTime.getTime()-startTime.getTime())
   switch (type) {
     case that.Message.Type.Text:
       content = msg.text();

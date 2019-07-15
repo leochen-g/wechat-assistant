@@ -1,3 +1,4 @@
+const {Friendship} = require('wechaty')
 const config = require('../../wechat.config');
 /**
  * 好友添加

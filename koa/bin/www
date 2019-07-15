@@ -82,5 +82,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log(`Listening on ${bind},please open another terminal to run wechaty`);
 }

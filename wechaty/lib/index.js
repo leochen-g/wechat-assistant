@@ -134,6 +134,51 @@ function isRealDate(str) {
   if (d.getMinutes() != r[5]) return false;
   return true;
 }
+/**
+ * 获取星座的英文
+ * @param {*} msg 
+ */
+function getConstellation(astro){
+  if(astro.includes('白羊座')){
+    return 'aries'
+  }
+  if(astro.includes('金牛座')){
+    return 'taurus'
+  }
+  if(astro.includes('双子座')){
+    return 'gemini'
+  }
+  if(astro.includes('巨蟹座')){
+    return 'cancer'
+  }
+  if(astro.includes('狮子座')){
+    return 'leo'
+  }
+  if(astro.includes('处女座')){
+    return 'virgo'
+  }
+  if(astro.includes('天平座')){
+    return 'libra'
+  }
+  if(astro.includes('天蝎座')){
+    return 'scorpio'
+  }
+  if(astro.includes('射手座')){
+    return 'sagittarius'
+  }
+  if(astro.includes('射手座')){
+    return 'sagittarius'
+  }
+  if(astro.includes('摩羯座')){
+    return 'capricorn'
+  }
+  if(astro.includes('水瓶座')){
+    return 'aquarius'
+  }
+  if(astro.includes('双鱼座')){
+    return 'pisces'
+  }
+}
 
 module.exports = {
   setSchedule,
@@ -142,5 +187,6 @@ module.exports = {
   convertTime,
   getDay,
   formatDate,
-  isRealDate
+  isRealDate,
+  getConstellation
 };
