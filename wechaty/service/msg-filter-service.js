@@ -66,6 +66,11 @@ async function getEventReply(event,msg,name,id){
  */
 async function filterFriendMsg(msg, name, id) {
   let obj = {type:'',content:'',event:{}}
+  if(msg==''){
+    obj.type ='text'
+    obj.content = '我在呢'
+    return obj;
+  }
   if (msg.includes(DELETEFRIEND) ||WEIXINOFFICIAL.includes(name) ||msg.length > 40) {
     console.log('字符超40字符，或无效及官方消息，不做回复');
     obj.type ='text'
@@ -166,6 +171,11 @@ async function filterFriendMsg(msg, name, id) {
  */
 async function filterRoomMsg(msg,name, id) {
   let obj = {type:'',content:'',event:{}}
+  if(msg==''){
+    obj.type ='text'
+    obj.content = '我在呢'
+    return obj;
+  }
   if (config.KEYWORDLIST && config.KEYWORDLIST.length > 0) {
     for (let item of config.KEYWORDLIST) {
       if (item.key.includes(msg)) {

@@ -54,7 +54,7 @@ function getDay(date) {
 /**
  * 格式化日期
  * @param {*} date 
- * @returns 例：2019-9-10 13:13:04
+ * @returns 例：2019-9-10 13:13:04 星期一
  */
 function formatDate(date) {
   var tempDate = new Date(date);
@@ -90,7 +90,7 @@ function formatDate(date) {
   if (second < 10) {
     second = '0' + second;
   }
-  return year + '-' + month + '-' + day + '日 ' + hour + ':' + min + ' ' + str;
+  return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ' ' + str;
 }
 
 /**
