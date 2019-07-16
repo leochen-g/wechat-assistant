@@ -1,4 +1,5 @@
 const {Friendship} = require('wechaty')
+const lib = require('../lib')
 const config = require('../../wechat.config');
 /**
  * 好友添加
@@ -14,11 +15,11 @@ async function onFriend(friendship) {
       case Friendship.Type.Receive:
         if (config.ACCEPTFRIEND.length == 0) {
           console.log('无认证关键词,30秒后将会自动通过好友请求')
-          await utils.delay(30000);
+          await lib.delay(30000);
           await friendship.accept();
         } else if (config.ACCEPTFRIEND.length>0&&config.ACCEPTFRIEND.includes(hello)) {
           console.log(`触发关键词${hello},30秒后自动通过好友请求`)
-          await utils.delay(3000); 
+          await lib.delay(3000); 
           await friendship.accept();
         }
         break;
