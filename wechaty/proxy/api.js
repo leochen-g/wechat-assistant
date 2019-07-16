@@ -138,7 +138,7 @@ async function getResByTX(word, id) {
     let option = {
       method: 'GET',
       url: apiConfig.TXBOT,
-      params: { key: apiConfig.APIKEY, question: word, userid: uniqueId }
+      params: { key: config.TXAPIKEY, question: word, userid: uniqueId }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -206,7 +206,7 @@ async function getRubbishType(word) {
     let option = {
       method: 'GET',
       url: apiConfig.TXRUBBISH,
-      params: { key: apiConfig.APIKEY, word: word }
+      params: { key: config.TXAPIKEY, word: word }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -244,7 +244,7 @@ async function getSweetWord() {
     let option = {
       method: 'GET',
       url: apiConfig.TXLOVE,
-      params: { key: apiConfig.APIKEY }
+      params: { key: config.TXAPIKEY }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -268,7 +268,7 @@ async function getTXweather(city) {
     let option = {
       method: 'GET',
       url: apiConfig.TXWEATHER,
-      params: { key: apiConfig.APIKEY, city: city }
+      params: { key: config.TXAPIKEY, city: city }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -299,7 +299,7 @@ async function getNews(id) {
     let option = {
       method: 'GET',
       url: apiConfig.TXDAYNEWS,
-      params: { key: apiConfig.APIKEY, num: 10, col: id }
+      params: { key: config.TXAPIKEY, num: 10, col: id }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -324,7 +324,7 @@ async function getMingYan() {
     let option = {
       method: 'GET',
       url: apiConfig.TXMINGYAN,
-      params: { key: apiConfig.APIKEY, num: 1 }
+      params: { key: config.TXAPIKEY, num: 1 }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -346,7 +346,7 @@ async function getStar(astro) {
     let option = {
       method: 'GET',
       url: apiConfig.TXSTAR,
-      params: { key: apiConfig.APIKEY, astro: astro }
+      params: { key: config.TXAPIKEY, astro: astro }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -371,7 +371,7 @@ async function getXing(name) {
     let option = {
       method: 'GET',
       url: apiConfig.TXXING,
-      params: { key: apiConfig.APIKEY, xing: name }
+      params: { key: config.TXAPIKEY, xing: name }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -393,7 +393,7 @@ async function getSkl() {
     let option = {
       method: 'GET',
       url: apiConfig.TXSKL,
-      params: { key: apiConfig.APIKEY }
+      params: { key: config.TXAPIKEY }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -415,7 +415,7 @@ async function getLunar(date) {
     let option = {
       method: 'GET',
       url: apiConfig.TXLUNAR,
-      params: { key: apiConfig.APIKEY,date:date }
+      params: { key: config.TXAPIKEY,date:date }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -437,7 +437,7 @@ async function getGoldReply() {
     let option = {
       method: 'GET',
       url: apiConfig.TXSHF,
-      params: { key: apiConfig.APIKEY,num:1 }
+      params: { key: config.TXAPIKEY,num:1 }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -458,7 +458,7 @@ async function getXhy() {
     let option = {
       method: 'GET',
       url: apiConfig.TXXHY,
-      params: { key: apiConfig.APIKEY,num:1 }
+      params: { key: config.TXAPIKEY,num:1 }
     };
     let res = await req(option);
     let content = parseBody(res);
@@ -479,7 +479,7 @@ async function getRkl() {
     let option = {
       method: 'GET',
       url: apiConfig.TXRKL,
-      params: { key: apiConfig.APIKEY,num:1 }
+      params: { key: config.TXAPIKEY,num:1 }
     };
     let res = await req(option);
     let content = parseBody(res);

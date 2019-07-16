@@ -148,7 +148,7 @@ function getConstellation(astro){
   if(astro.includes('双子座')){
     return 'gemini'
   }
-  if(astro.includes('巨蟹座')){
+  if(astro.includes('巨蟹座') || astro.includes('钜蟹座')){
     return 'cancer'
   }
   if(astro.includes('狮子座')){
@@ -157,7 +157,7 @@ function getConstellation(astro){
   if(astro.includes('处女座')){
     return 'virgo'
   }
-  if(astro.includes('天平座')){
+  if(astro.includes('天平座') || astro.includes('天秤座') || astro.includes('天瓶座') || astro.includes('天枰座')){
     return 'libra'
   }
   if(astro.includes('天蝎座')){

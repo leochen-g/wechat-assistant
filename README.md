@@ -1,5 +1,7 @@
 
 
+[![ 由Wechaty提供 ](https://img.shields.io/badge/Powered%20By-Wechaty-blue.svg)](https://github.com/chatie/wechaty)
+
 [![node version](https://img.shields.io/badge/node-%3E%3D10-blue.svg)](http://nodejs.cn/download/)
 [![node version](https://img.shields.io/badge/wechaty-%3E%3D0.26-blue.svg)](https://github.com/Chatie/wechaty)
 ![](https://img.shields.io/badge/Window-green.svg)
@@ -9,12 +11,13 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [微信小助手](#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E5%8A%A9%E6%89%8B)
+- [微信小助手2.0全新升级](#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E5%8A%A9%E6%89%8B20%E5%85%A8%E6%96%B0%E5%8D%87%E7%BA%A7)
 - [效果预览](#%E6%95%88%E6%9E%9C%E9%A2%84%E8%A7%88)
 - [安装](#%E5%AE%89%E8%A3%85)
   - [1、安装MongoDB与Node](#1%E5%AE%89%E8%A3%85mongodb%E4%B8%8Enode)
   - [2、拉取项目并安装依赖](#2%E6%8B%89%E5%8F%96%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96)
   - [3、修改配置文件](#3%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
+    - [注册天行数据账号](#%E6%B3%A8%E5%86%8C%E5%A4%A9%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%B4%A6%E5%8F%B7)
   - [4、本地启动项目](#4%E6%9C%AC%E5%9C%B0%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE)
   - [5、服务器启动项目](#5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE)
 - [常见问题解决方法](#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95)
@@ -35,6 +38,7 @@
   - [事件字典](#%E4%BA%8B%E4%BB%B6%E5%AD%97%E5%85%B8)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 
 ## 微信小助手2.0全新升级
@@ -70,7 +74,14 @@ cd wechat-assistant
 npm install
 ```
 ### 3、修改配置文件
+
 根目录下存在一个`wechat.config.example.js`文件，请copy一份到当前目录并修改文件名为`wechat.config.js`或直接修改文件名为`wechat.config.js`，配置文件中已对各字段说明清晰，项目出现问题时，请先对照配置内容自行排查问题原因
+
+#### 注册天行数据账号
+
+由于本项目部分接口来自[天行数据](https://www.tianapi.com/signup.html?source=474284281)，所以需要注册自己的天行数据账号，并在TXAPIKEY位置填写自己的key，默认我贡献了自己的key，不过还是建议大家自行申请一个，注册地址：[天行数据注册](https://www.tianapi.com/signup.html?source=474284281)
+
+***注：*** 如果删除默认的天行数据key，或者留空会导致获取天气失败，无法使用机器人的情况
 
 ```
 // 本文件是配置案例文件，请拷贝一份此文件后重命名为wechat.config.js，否则项目无法运行
@@ -78,7 +89,7 @@ module.exports = {
     AUTOREPLY: true, // 是否设置机器人自动回复，默认关闭 false  开启为 true
     DEFAULTBOT: '0', // 默认机器人 0 天行机器人 1 天行对接的图灵机器人 2 图灵机器人
     TULINGKEY: '', //图灵机器人KEY
-    TXAPIKEY: '',// 天行数据key
+    TXAPIKEY: '',// 必填，天行数据key，目前贡献的是我个人的，建议申请自己的天行数据key，可以对机器人个性化定制
     /**
      * 每日说定时任务（支持多人）
      * name:要发送好友的昵称 （注：不是微信号！不是微信号！不是微信号！）
