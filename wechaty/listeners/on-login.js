@@ -105,7 +105,7 @@ async function initSchedule(that, scheduleList, daySayList, RoomSayList) {
 async function onLogin(user) {
   console.log(`贴心助理${user}登录了`);
   setTimeout(async ()=>{
-    let scheduleList = await api.getScheduleList
+    let scheduleList = await api.getScheduleList()
     console.log('提醒任务列表',scheduleList)
     initSchedule(this, scheduleList,config.DAYLIST,config.ROOMLIST);
   }, 4000)
