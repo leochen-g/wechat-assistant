@@ -309,9 +309,9 @@ async function getNews(id) {
       let shortUrl = await getShortUrl('https://www.tianapi.com/weixin/news/?col='+id)
       for (let i in newList) {
         let num = parseInt(i) + 1;
-        news = `${news}<br>${num}.${newList[i].title}<br>新闻详情查看：${shortUrl}`;
+        news = `${news}<br>${num}.${newList[i].title}`;
       }
-      return news;
+      return `${news}<br>新闻详情查看：${shortUrl}<br>`;
     }
   } catch (error) {
     console.log('获取天行新闻失败', error);
