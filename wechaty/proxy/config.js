@@ -19,4 +19,5 @@ module.exports = {
   TXSHF: 'http://api.tianapi.com/txapi/godreply/',// 天行神回复
   TXXHY: 'http://api.tianapi.com/txapi/xiehou/',// 天行歇后语
   TXRKL: 'http://api.tianapi.com/txapi/rkl/',// 天行绕口令
+  TXSHORTURL: 'http://api.tianapi.com/txapi/turl/',//天行短链
 } 

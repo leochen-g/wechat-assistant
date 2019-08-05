@@ -306,9 +306,10 @@ async function getNews(id) {
     if (content.code === 200) {
       let newList = content.newslist;
       let news = '';
+      let shortUrl = await getShortUrl('https://www.tianapi.com/weixin/news/?col='+id)
       for (let i in newList) {
         let num = parseInt(i) + 1;
-        news = `${news}<br>${num}.${newList[i].title}`;
+        news = `${news}<br>${num}.${newList[i].title}<br>新闻详情查看：${shortUrl}`;
       }
       return news;
     }
@@ -492,6 +493,27 @@ async function getRkl() {
     console.log('获取天行绕口令失败', error);
   }
 }
+/**
+ * 天行短连接
+ */
+async function getShortUrl(url) {
+  try {
+    let option = {
+      method: 'GET',
+      url: apiConfig.TXSHORTURL,
+      params: { key: config.TXAPIKEY,url:url }
+    };
+    let res = await req(option);
+    let content = parseBody(res);
+    if (content.code === 200) {
+      let item = content.newslist[0];
+      let shorturl = item.shorturl 
+      return shorturl;
+    }
+  } catch (error) {
+    console.log('获取天行短连接失败', error);
+  }
+}
 module.exports = {
   getOne,
   getResByTXTL,
@@ -511,5 +533,6 @@ module.exports = {
   getLunar,
   getGoldReply,
   getXhy,
-  getRkl
+  getRkl,
+  getShortUrl
 };

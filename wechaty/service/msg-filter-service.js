@@ -173,7 +173,7 @@ async function filterRoomMsg(msg,name, id) {
   let obj = {type:'',content:'',event:{}}
   if(msg==''){
     obj.type ='text'
-    obj.content = '我在呢'
+    obj.content = '我在呢s'
     return obj;
   }
   if (config.KEYWORDLIST && config.KEYWORDLIST.length > 0) {
