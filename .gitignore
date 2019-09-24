@@ -12,6 +12,7 @@
 *.log
 /build/
 /bin/
+*/output
 *node_modules
 */log
 .env

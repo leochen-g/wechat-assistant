@@ -53,8 +53,8 @@ function contentDistinguish(keywordArray,name) {
  * @param {*} id 用户id
  * @returns {String}
  */
-async function getEventReply(event,msg,name,id){
-  let reply = await dispatch.dispatchEventContent(event,msg,name,id);
+async function getEventReply(event,msg,name,id,avatar){
+  let reply = await dispatch.dispatchEventContent(event,msg,name,id,avatar);
   return reply;
 }
 
@@ -62,9 +62,11 @@ async function getEventReply(event,msg,name,id){
  * 微信好友文本消息事件过滤
  * @param {string} msg 消息内容
  * @param {string} name 好友昵称
+ * @param {string} id 用户id
+ * @param {string} avatar 用户头像
  * @returns {number} 返回回复内容
  */
-async function filterFriendMsg(msg, name, id) {
+async function filterFriendMsg(msg, name, id,avatar) {
   let obj = {type:'',content:'',event:{}}
   if(msg==''){
     obj.type ='text'
@@ -122,21 +124,21 @@ async function filterFriendMsg(msg, name, id) {
         case 'start':
           if (msg.startsWith(item.key)) {
             msg = msg.replace(item.key,'')
-            obj.content = await getEventReply(item.event,msg,name,id)
+            obj.content = await getEventReply(item.event,msg,name,id,avatar)
             return obj;
           }
           break;
         case 'middle':
           if (msg.includes(item.key)) {
             msg = msg.replace(item.key,'')
-            obj.content = await getEventReply(item.event,msg,name,id)
+            obj.content = await getEventReply(item.event,msg,name,id,avatar)
             return obj;
           }
           break;
         case 'end':
           if (msg.endsWith(item.key)) {
             msg = msg.replace(item.key,'')
-            obj.content = await getEventReply(item.event,msg,name,id)
+            obj.content = await getEventReply(item.event,msg,name,id,avatar)
             return obj;
           }
           break;
@@ -173,7 +175,7 @@ async function filterRoomMsg(msg,name, id) {
   let obj = {type:'',content:'',event:{}}
   if(msg==''){
     obj.type ='text'
-    obj.content = '我在呢s'
+    obj.content = '我在呢'
     return obj;
   }
   if (config.KEYWORDLIST && config.KEYWORDLIST.length > 0) {

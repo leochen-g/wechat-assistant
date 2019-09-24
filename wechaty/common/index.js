@@ -1,6 +1,8 @@
 const api = require('../proxy/api');
 const lib = require('../lib');
 const service = require('../service/msg-filter-service');
+const {FileBox} = require('file-box');
+const path = require('path')
 /**
  * 获取每日新闻内容
  * @param {*} sortId 新闻资讯分类Id
@@ -64,7 +66,8 @@ async function addSchedule(that,obj) {
 async function getContactTextReply(that, contact, msg) {
   const contactName = contact.name();
   const contactId = contact.id;
-  let result = await service.filterFriendMsg(msg, contactName, contactId);
+  const contactAvatar = await contact.avatar();
+  let result = await service.filterFriendMsg(msg, contactName, contactId,contactAvatar);
   if (result.type == 'text') {
     return result.content;
   } else if (result.type == 'addRoom') {
@@ -114,7 +117,15 @@ async function getContactTextReply(that, contact, msg) {
       console.log(`定时任务出错，${e}`)
     }
   }else if(result.type == 'event') {
-    return result.content;
+    if(typeof result.content === 'object'){
+      if(result.content.type === 'file'){
+        let fileObj = FileBox.fromDataURL('data:text/plain;base64,'+result.content.src, contactName+contactId+'.jpg')
+        console.log(fileObj);
+        return  fileObj
+      }
+    }else{
+      return result.content;
+    }
   }
 }
 /**
