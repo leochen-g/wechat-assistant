@@ -76,7 +76,7 @@ async function dispatchRoomFilterByMsgType(that,room, msg) {
       content = msg.text();
       console.log(`群名: ${roomName} 发消息人: ${contactName} 内容: ${content}`)
       if(mentionSelf){
-        content = content.replace(/@\w+/g,'').trim()
+        content = content.replace(/@[^@]+/g,'').trim()
         reply = await common.getRoomTextReply(content,contactName,contactId,contactAvatar);
         console.log('回复内容',reply)
         if (reply !== '') {

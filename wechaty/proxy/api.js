@@ -590,9 +590,8 @@ async function getMeiNv() {
       url:apiConfig.TXMEINV,
       params: {
         key:config.TXAPIKEY,
-        num:10,
-        page:lib.randomRange(0,9),
-        rand:1
+        num:50,
+        page:lib.randomRange(1,99),
       }
     }
     let res = await req(option);
@@ -605,7 +604,6 @@ async function getMeiNv() {
         }
       }
       let item = arr[lib.randomRange(0,arr.length)];
-      console.log('arr',item)
       let fileObj = ''
       if(item.picUrl){
         fileObj = FileBox.fromUrl(item.picUrl)
