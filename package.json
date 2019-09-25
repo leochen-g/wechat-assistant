@@ -1,6 +1,6 @@
 {
     "name": "wechat-assistant",
-    "version": "2.0.1",
+    "version": "2.1.1",
     "description": "微信小助手2.0",
     "main": "index.js",
     "scripts": {
