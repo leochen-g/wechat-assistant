@@ -179,6 +179,14 @@ function getConstellation(astro){
     return 'pisces'
   }
 }
+/**
+ * 返回指定范围的随机整数
+ * @param {*} min 
+ * @param {*} max 
+ */
+function randomRange(min, max) { // min最小值，max最大值
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
 module.exports = {
   setSchedule,
@@ -188,5 +196,6 @@ module.exports = {
   getDay,
   formatDate,
   isRealDate,
-  getConstellation
+  getConstellation,
+  randomRange
 };

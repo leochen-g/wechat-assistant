@@ -4,6 +4,7 @@ const apiConfig = require('./config');
 const config = require('../../wechat.config');
 const crypto = require('crypto');
 const {FileBox} = require('file-box')
+const lib = require('../lib/index')
 /**
  * 解析响应数据
  * @param {*} content 内容
@@ -553,8 +554,8 @@ async function getEmo(msg) {
       contentType:'application/json, text/plain, */*',
       params: {
         offset:0,
-        limit:10,
-        block:'hot'
+        limit:lib.randomRange(10,40),
+        block:'list'
       }
     }
     let res = await req(option);
@@ -562,11 +563,14 @@ async function getEmo(msg) {
     if (content.meta.status === 200) {
       let fileObj =''
       if(content.data&&content.data.length>0){
+        let arr = []
         for(let i of content.data){
           if(i.url.includes('.jpg')){
-            return FileBox.fromUrl(i.url)
+            arr.push(i)
           }
         }
+        let item = arr[lib.randomRange(0,arr.length)];
+        return FileBox.fromUrl(item.url)
       }else{
         fileObj = FileBox.fromUrl('http://dl.weshineapp.com/gif/20190902/401ed8e703984d504ca1e49ffd4ed8ac.jpg')
       }
@@ -587,14 +591,21 @@ async function getMeiNv() {
       params: {
         key:config.TXAPIKEY,
         num:10,
-        page:1,
+        page:lib.randomRange(0,9),
         rand:1
       }
     }
     let res = await req(option);
     let content = parseBody(res);
     if (content.code === 200) {
-      let item = content.newslist[Math.floor(Math.random()*10-1)];
+      let arr = []
+      for(let i of content.newslist){
+        if(i.picUrl.includes('.jpg')){
+          arr.push(i)
+        }
+      }
+      let item = arr[lib.randomRange(0,arr.length)];
+      console.log('arr',item)
       let fileObj = ''
       if(item.picUrl){
         fileObj = FileBox.fromUrl(item.picUrl)
