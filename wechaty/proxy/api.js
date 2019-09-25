@@ -570,7 +570,12 @@ async function getEmo(msg) {
           }
         }
         let item = arr[lib.randomRange(0,arr.length)];
-        return FileBox.fromUrl(item.url)
+        if(item.url){
+          return FileBox.fromUrl(item.url)
+        }else{
+          return FileBox.fromUrl('http://dl.weshineapp.com/gif/20190902/401ed8e703984d504ca1e49ffd4ed8ac.jpg')
+        }
+        
       }else{
         fileObj = FileBox.fromUrl('http://dl.weshineapp.com/gif/20190902/401ed8e703984d504ca1e49ffd4ed8ac.jpg')
       }
@@ -590,7 +595,7 @@ async function getMeiNv() {
       url:apiConfig.TXMEINV,
       params: {
         key:config.TXAPIKEY,
-        num:50,
+        num:10,
         page:lib.randomRange(1,99),
       }
     }
