@@ -120,8 +120,9 @@ async function getContactTextReply(that, contact, msg) {
     if(typeof result.content === 'object'){
       if(result.content.type === 'file'){
         let fileObj = FileBox.fromDataURL('data:text/plain;base64,'+result.content.src, contactName+contactId+'.jpg')
-        console.log(fileObj);
         return  fileObj
+      }else if(result.content.type === 'fileBox'){
+        return result.content.src
       }
     }else{
       return result.content;
@@ -134,13 +135,21 @@ async function getContactTextReply(that, contact, msg) {
  * @param {*} name 发消息者昵称
  * @param {*} id 发消息者id
  */
-async function getRoomTextReply(content,name,id){
-  console.log('room content',content)
-  let result = await service.filterRoomMsg(content,name, id);
+async function getRoomTextReply(content,name,id,avatar){
+  let result = await service.filterRoomMsg(content,name, id, avatar);
   if (result.type == 'text') {
     return result.content;
   } else if (result.type == 'event') {
-    return result.content;
+    if(typeof result.content === 'object'){
+      if(result.content.type === 'file'){
+        let fileObj = FileBox.fromDataURL('data:text/plain;base64,'+result.content.src, name+id+'.jpg')
+        return  fileObj
+      }else if(result.content.type === 'fileBox'){
+        return result.content.src
+      }
+    }else{
+      return result.content;
+    }
   }
 }
 

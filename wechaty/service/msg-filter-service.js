@@ -171,7 +171,7 @@ async function filterFriendMsg(msg, name, id,avatar) {
  * 1 开启了好友验证 || 朋友推荐消息 || 发送的文字消息过长,大于40个字符
  * 2 初次添加好友
  */
-async function filterRoomMsg(msg,name, id) {
+async function filterRoomMsg(msg,name, id,avatar) {
   let obj = {type:'',content:'',event:{}}
   if(msg==''){
     obj.type ='text'
@@ -196,21 +196,21 @@ async function filterRoomMsg(msg,name, id) {
         case 'start':
           if (msg.startsWith(item.key)) {
             msg = msg.replace(item.key,'')
-            obj.content = await getEventReply(item.event,msg,name,id)
+            obj.content = await getEventReply(item.event,msg,name,id,avatar)
             return obj;
           }
           break;
         case 'middle':
           if (msg.includes(item.key)) {
             msg = msg.replace(item.key,'')
-            obj.content = await getEventReply(item.event,msg,name,id)
+            obj.content = await getEventReply(item.event,msg,name,id,avatar)
             return obj;
           }
           break;
         case 'end':
           if (msg.endsWith(item.key)) {
             msg = msg.replace(item.key,'')
-            obj.content = await getEventReply(item.event,msg,name,id)
+            obj.content = await getEventReply(item.event,msg,name,id,avatar)
             return obj;
           }
           break;
@@ -220,8 +220,15 @@ async function filterRoomMsg(msg,name, id) {
     }
   } 
 
-  obj.type = 'text'
-  obj.content = await dispatch.dispatchAiBot(config.DEFAULTBOT,msg,name,id)
+  if(config.AUTOREPLY){
+    console.log('开启了机器人自动回复功能')
+    obj.type = 'text'
+    obj.content = await dispatch.dispatchAiBot(config.DEFAULTBOT,msg,name,id)
+  }else{
+    console.log('没有开启机器人自动回复功能')
+    obj.type = 'text'
+    obj.content = ''
+  }
   return obj
 }
 

@@ -1,7 +1,5 @@
 const api = require('../proxy/api');
 const lib = require('../lib');
-const {FileBox} = require('file-box')
-const path =require('path')
 
 /**
  * 根据事件名称分配不同的api处理，并获取返回内容
@@ -42,9 +40,24 @@ async function dispatchEventContent(eName, msg,name,id,avatar) {
       break;
     case 'avatar':
       let base64Text =  await avatar.toBase64()
+      let ava = await api.getAvatar(base64Text)
       content = {
-        type:'file',
-        src: JSON.stringify(base64Text)
+        type:'fileBox',
+        src: ava
+      }
+      break;
+    case 'emo':
+      let emo = await api.getEmo(msg)
+      content = {
+        type:'fileBox',
+        src: emo
+      }
+      break;
+    case 'meinv':
+      let meinv = await api.getMeiNv()
+      content = {
+        type:'fileBox',
+        src: meinv
       }
       break;
     default:

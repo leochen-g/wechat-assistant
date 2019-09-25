@@ -3,7 +3,7 @@ const { req } = require('./superagent');
 const apiConfig = require('./config');
 const config = require('../../wechat.config');
 const crypto = require('crypto');
-
+const {FileBox} = require('file-box')
 /**
  * 解析响应数据
  * @param {*} content 内容
@@ -514,6 +514,99 @@ async function getShortUrl(url) {
     console.log('获取天行短连接失败', error);
   }
 }
+/**
+ * 获取自定义头像
+ * @param {*} base 
+ */
+async function getAvatar(base){
+ 
+  try{
+    let option = {
+      method:'POST',
+      url:apiConfig.TXAVATAR,
+      params:{
+        key: config.TXAPIKEY,
+        img:'data:image/jpeg;base64,'+base
+      }
+    }
+  
+    let res = await req(option);
+    let content = parseBody(res);
+    if (content.code === 200) {
+      let item = content.newslist[0];
+      let fileObj = FileBox.fromUrl(item.picurl)
+      return fileObj;
+    }
+  }catch(e){
+    console.log('获取自定义头像失败', e);
+  }
+}
+/**
+ * 获取表情包
+ * @param {*} msg 
+ */
+async function getEmo(msg) {
+  try {
+    let option = {
+      method:'GET',
+      url:apiConfig.EMOHOST+encodeURI(msg),
+      contentType:'application/json, text/plain, */*',
+      params: {
+        offset:0,
+        limit:10,
+        block:'hot'
+      }
+    }
+    let res = await req(option);
+    let content = parseBody(res);
+    if (content.meta.status === 200) {
+      let fileObj =''
+      if(content.data&&content.data.length>0){
+        for(let i of content.data){
+          if(i.url.includes('.jpg')){
+            return FileBox.fromUrl(i.url)
+          }
+        }
+      }else{
+        fileObj = FileBox.fromUrl('http://dl.weshineapp.com/gif/20190902/401ed8e703984d504ca1e49ffd4ed8ac.jpg')
+      }
+      return fileObj;
+    }
+  }catch(e){
+    console.log('获取表情包失败', e);
+  }
+}
+/**
+ * 获取美女图片
+ */
+async function getMeiNv() {
+  try {
+    let option = {
+      method:'GET',
+      url:apiConfig.TXMEINV,
+      params: {
+        key:config.TXAPIKEY,
+        num:10,
+        page:1,
+        rand:1
+      }
+    }
+    let res = await req(option);
+    let content = parseBody(res);
+    if (content.code === 200) {
+      let item = content.newslist[Math.floor(Math.random()*10-1)];
+      let fileObj = ''
+      if(item.picUrl){
+        fileObj = FileBox.fromUrl(item.picUrl)
+      }else{
+        fileObj = FileBox.fromUrl('http://dl.weshineapp.com/gif/20190902/401ed8e703984d504ca1e49ffd4ed8ac.jpg')
+      }
+      return fileObj;
+    }
+  }catch(e){
+    console.log('获取美女图片失败', e);
+  }
+}
 module.exports = {
   getOne,
   getResByTXTL,
@@ -534,5 +627,8 @@ module.exports = {
   getGoldReply,
   getXhy,
   getRkl,
-  getShortUrl
+  getShortUrl,
+  getAvatar,
+  getEmo,
+  getMeiNv
 };

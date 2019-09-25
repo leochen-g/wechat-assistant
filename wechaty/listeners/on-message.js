@@ -44,6 +44,9 @@ async function dispatchFriendFilterByMsgType(that, msg) {
       case that.Message.Type.Video:
         console.log(`发消息人${await contact.name()}:发了一个视频`)
         break;
+      case that.Message.Type.Audio:
+        console.log(`发消息人${await contact.name()}:发了一个视频`)
+        break;
       default:
         break;
     }
@@ -59,7 +62,6 @@ async function dispatchFriendFilterByMsgType(that, msg) {
  * @param {*} msg 消息主体
  */
 async function dispatchRoomFilterByMsgType(that,room, msg) {
-  let startTime = new Date()
   const contact = msg.from(); // 发消息人
   const contactName = contact.name()
   const roomName = await room.topic()
@@ -68,18 +70,24 @@ async function dispatchRoomFilterByMsgType(that,room, msg) {
   let content = '';
   let reply = '';
   let contactId = contact.id
-  let endTime = new Date()
+  let contactAvatar = await contact.avatar();
   switch (type) {
     case that.Message.Type.Text:
       content = msg.text();
       console.log(`群名: ${roomName} 发消息人: ${contactName} 内容: ${content}`)
       if(mentionSelf){
-        content = content.replace(/@(.+?)\s/g,'')
-        reply = await common.getRoomTextReply(content,contactName,contactId);
+        content = content.replace(/@\w+/g,'').trim()
+        reply = await common.getRoomTextReply(content,contactName,contactId,contactAvatar);
         console.log('回复内容',reply)
         if (reply !== '') {
           await lib.delay(1000);
-          room.say(`@${contactName} ${reply}`);
+          if(typeof reply === 'object'){
+            room.say(`@${contactName}`);
+            await lib.delay(1000);
+            room.say(reply)
+          }else{
+            room.say(reply);
+          }
         }
       }
       break;
@@ -94,6 +102,9 @@ async function dispatchRoomFilterByMsgType(that,room, msg) {
       break;
     case that.Message.Type.Video:
       console.log(`群名: ${roomName} 发消息人: ${contactName} 发了一个视频`)
+      break;
+    case that.Message.Type.Audio:
+      console.log(`群名: ${roomName} 发消息人: ${contactName} 发了一个语音`)
       break;
     default:
       break;
