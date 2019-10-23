@@ -27,7 +27,6 @@
         "cheerio": "^1.0.0-rc.3",
         "cross-env": "^5.2.0",
         "crypto": "^1.0.1",
-        "debug": "^4.1.1",
         "file-box": "^0.8.27",
         "koa": "^2.7.0",
         "koa-bodyparser": "^4.2.1",
@@ -40,6 +39,9 @@
         "wechaty": "^0.28.3"
     },
     "devDependencies": {
+        "@microsoft/recognizers-text-suite": "~1.2.7",
+        "bosonnlp": "^0.1.0",
+        "debug": "^4.1.1",
         "nodemon": "^1.19.1"
     }
 }
