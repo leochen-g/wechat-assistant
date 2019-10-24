@@ -8,7 +8,7 @@ const config = require('../config')
 
 console.log("process.env.NODE_ENV=" + process.env.NODE_ENV);
 
-const port = normalizePort(config.PORT || '3008');
+const port = normalizePort(config.port || '3008');
 
 // print port
 console.log('port = ' + config.port);

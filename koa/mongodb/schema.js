@@ -10,5 +10,46 @@ let assistant = new Schema({
     hasExpired: { type: Boolean, default: false }, // 判断任务是否过期
     createdAt: { type: Date, default: Date.now },
 })
+let config = new Schema({
+    AUTOREPLY:{type:Boolean,default:false}, // 是否开始自动回复模式
+    DEFAULTBOT:{type:Number,default:0}, // // 默认机器人 0 天行机器人 1 天行对接的图灵机器人 2 图灵机器人
+    TULINGKEY:String,//图灵机器人KEY
+    TXAPIKEY:String,// 天行数据key
+    DAYLIST:[{
+        name:String,
+        alias:String,
+        memorialDay:String,
+        city:String,
+        endword:String,
+        date:String
+    }],
+    ROOMLIST:[{
+        roomName:String,
+        sortId:Number,
+        endWord:String,
+        date:String
+    }],
+    ACCEPTFRIEND:[String],
+    ROOMJOINLIST:[{
+        name:String,
+        welcome:String
+    }],
+    KEYWORDLIST:[{
+        key:[String],
+        reply:String
+    }],
+    NEWFRIENDREPLY:String,
+    ADDROOMKEYLIST:[{
+        key:[String],
+        roomName: String
+    }],
+    EVENTKEYWORDLIST:[{
+        key:String,position:String,event:String,
+    }],
+    UPDATETIME:{type: Date, default: Date.now}
+})
 
-module.exports = mongoose.model('Assistant', assistant)
+module.exports ={
+    Assistant:mongoose.model('Assistant', assistant),
+    Config:mongoose.model('Config', config)
+} 

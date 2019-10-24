@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const config = require('../config')
 
 const db_url = config.mongodb_url
-let db = mongoose.connect(db_url, { useNewUrlParser: true })
+let db = mongoose.connect(db_url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 //连接成功
 mongoose.connection.on('connect', () => {

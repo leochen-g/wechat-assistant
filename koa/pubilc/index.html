@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>微信小助手配置</title>
+    <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="./static/font/fontawesome-free-5.11.2-web/css/all.css">
+    <link rel="stylesheet" href="./static/font/fontawesome-free-5.11.2-web/css/v4-shims.css">
+</head>
+<body>
+<div id="app">
+    <div class="container-fluid header">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <img class="logo" src="./static/img/logo.jpeg" alt="">
+                    <h4 class="title">微信小助手</h4>
+                    <div class="person-info">
+                        <div class="person-info-item"><a href="http://www.xkboke.com" title="博客" target="_blank">博客</a>
+                        </div>
+                        <div class="person-info-item"><a href="https://github.com/gengchen528/wechat-assistant"
+                                                         title="github" target="_blank">
+                                <svg data-v-09bee9cf="" width="21" height="18" viewBox="0 0 21 18"
+                                     class="icon github-icon">
+                                    <path data-v-09bee9cf="" fill="#161614" fill-rule="nonzero"
+                                          d="M1.857 9.203c0 3.624 2.456 6.698 5.862 7.782.429.076.585-.177.585-.395 0-.194-.007-.71-.012-1.395-2.384.496-2.887-1.1-2.887-1.1-.39-.947-.952-1.2-.952-1.2-.778-.508.06-.498.06-.498.86.058 1.312.846 1.312.846.765 1.253 2.007.89 2.495.68.078-.529.3-.89.544-1.095-1.903-.207-3.904-.911-3.904-4.054 0-.896.334-1.628.882-2.201-.088-.208-.383-1.042.084-2.171 0 0 .72-.22 2.357.84a8.557 8.557 0 0 1 2.146-.276 8.566 8.566 0 0 1 2.146.277c1.636-1.062 2.354-.841 2.354-.841.468 1.129.174 1.963.086 2.17.55.574.881 1.306.881 2.202 0 3.15-2.004 3.844-3.913 4.047.307.253.581.754.581 1.52 0 1.096-.01 1.98-.01 2.25 0 .219.154.474.589.394C16.546 15.898 19 12.825 19 9.203 19 4.673 15.162 1 10.428 1c-4.733 0-8.57 3.672-8.57 8.203z"></path>
+                                </svg>
+                            </a></div>
+                        <div class="person-info-item"><a href="https://juejin.im/user/5878acc28d6d810058b6dcaf/posts"
+                                                         title="掘金主页" target="_blank"><img
+                                        src="https://b-gold-cdn.xitu.io/v3/static/img/simplify-logo.3e3c253.svg" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid main">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    微信小助手参数配置
+                </div>
+            </div>
+            <div class="row">
+                <form action="" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label t-l">开启机器人自动回复</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="autoReply" id="inlineRadio1" value="true"> 是
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="autoReply" id="inlineRadio2" value="false"> 否
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-2 control-label t-l">使用机器人类型</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="robot" id="inlineRadio1" value="0"> 天行机器人
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="robot" id="inlineRadio2" value="1"> 天行对接的图灵机器人
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="robot" id="inlineRadio2" value="2"> 图灵机器人
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-2 control-label t-l">图灵机器人Key</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="key">
+                        </div>
+                        <div class="col-sm-5 p-t-7">
+                            <a href="">申请地址</a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-2 control-label t-l">天行数据key</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="key">
+                        </div>
+                        <div class="col-sm-5 p-t-7">
+                            <a href="">申请地址</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-2 control-label t-l">新加好友自动回复</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="自动回复内容">
+                        </div>
+                        <div class="col-sm-5 p-t-7">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="blue-color">每日说定时任务</label>
+                        </div>
+                        <div>
+                            <div class="col-sm-1"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="微信昵称"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="微信备注"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="两人纪念日"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="好友所在城市"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="结尾备注"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="循环日期"></div>
+                            <div class="col-sm-1">
+                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-sm-12">
+                                <table  class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <td>微信昵称</td>
+                                        <td>微信备注</td>
+                                        <td>两人纪念日</td>
+                                        <td>好友所在城市</td>
+                                        <td>结尾备注</td>
+                                        <td>循环日期</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="blue-color">群定时任务</label>
+                        </div>
+                        <div>
+                            <div class="col-sm-3"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="群名"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="新闻类型"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="结尾备注"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="循环日期"></div>
+                            <div class="col-sm-1">
+                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-sm-12">
+                                <table  class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td>群名</td>
+                                            <td>新闻类型</td>
+                                            <td>结尾备注</td>
+                                            <td>循环日期</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="blue-color">进群欢迎词</label>
+                        </div>
+                        <div>
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="群名"></div>
+                            <div class="col-sm-7 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                                                         placeholder="欢迎内容"></div>
+                            <div class="col-sm-1">
+                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-sm-12">
+                                <table  class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <td>群名</td>
+                                        <td>欢迎内容</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="blue-color">关键词回复</label>
+                        </div>
+                        <div>
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                                                               placeholder="多个关键词，请使用中文'，'隔开"></div>
+                            <div class="col-sm-7 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                                                               placeholder="回复内容"></div>
+                            <div class="col-sm-1">
+                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-sm-12">
+                                <table  class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <td>关键词</td>
+                                        <td>回复内容</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="blue-color">关键词加群</label>
+                        </div>
+                        <div>
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                                                               placeholder="多个关键词，请使用中文'，'隔开"></div>
+                            <div class="col-sm-7 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                                                               placeholder="群名"></div>
+                            <div class="col-sm-1">
+                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-sm-12">
+                                <table  class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <td>关键词</td>
+                                        <td>群名</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label for="exampleInputEmail1" class="blue-color">关键词触发指定事件</label>
+                        </div>
+                        <div>
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                                                               placeholder="关键词"></div>
+                            <div class="col-sm-3 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                                                               placeholder="关键词所在位置"></div>
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                                                               placeholder="触发事件"></div>
+                            <div class="col-sm-1">
+                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-sm-12">
+                                <table  class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <td>关键词</td>
+                                        <td>关键词位置</td>
+                                        <td>触发事件</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./static/js/jquery-3.4.1.min.js"></script>
+<script src="./static/js/bootstrap.min.js"></script>
+<script src="./static/js/vue.js"></script>
+<script src="./static/js/axios.min.js"></script>
+<script src="./static/js/qs.min.js"></script>
+<script src="./static/js/index.js"></script>
+</body>
+</html>
