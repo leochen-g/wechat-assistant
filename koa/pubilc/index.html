@@ -16,8 +16,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <img class="logo" src="./static/img/logo.jpeg" alt="">
-                    <h4 class="title">微信小助手</h4>
+                    <img class="logo" src="./static/img/wechay.png" alt="">
+                    <h4 class="title">微信小助手配置</h4>
                     <div class="person-info">
                         <div class="person-info-item"><a href="http://www.xkboke.com" title="博客" target="_blank">博客</a>
                         </div>
@@ -42,7 +42,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    微信小助手参数配置
                 </div>
             </div>
             <div class="row">
@@ -51,10 +50,10 @@
                         <label class="col-sm-2 control-label t-l">开启机器人自动回复</label>
                         <div class="col-sm-10">
                             <label class="radio-inline">
-                                <input type="radio" name="autoReply" id="inlineRadio1" value="true"> 是
+                                <input type="radio" name="autoReply"  value="true" v-model="formData.AUTOREPLY"> 是
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="autoReply" id="inlineRadio2" value="false"> 否
+                                <input type="radio" name="autoReply"  value="false" v-model="formData.AUTOREPLY"> 否
                             </label>
                         </div>
                     </div>
@@ -63,42 +62,42 @@
                         <label for="inputPassword" class="col-sm-2 control-label t-l">使用机器人类型</label>
                         <div class="col-sm-10">
                             <label class="radio-inline">
-                                <input type="radio" name="robot" id="inlineRadio1" value="0"> 天行机器人
+                                <input type="radio" name="robot"  value="0" v-model="formData.DEFAULTBOT"> 天行机器人
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="robot" id="inlineRadio2" value="1"> 天行对接的图灵机器人
+                                <input type="radio" name="robot"  value="1" v-model="formData.DEFAULTBOT"> 天行对接的图灵机器人
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="robot" id="inlineRadio2" value="2"> 图灵机器人
+                                <input type="radio" name="robot" value="2" v-model="formData.DEFAULTBOT"> 图灵机器人
                             </label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputPassword" class="col-sm-2 control-label t-l">图灵机器人Key</label>
-                        <div class="col-sm-5">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="key">
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="key" v-model="formData.TULINGKEY">
                         </div>
-                        <div class="col-sm-5 p-t-7">
+                        <div class="col-sm-4 p-t-7">
                             <a href="">申请地址</a>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputPassword" class="col-sm-2 control-label t-l">天行数据key</label>
-                        <div class="col-sm-5">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="key">
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control"  placeholder="key" v-model="formData.TXAPIKEY">
                         </div>
-                        <div class="col-sm-5 p-t-7">
+                        <div class="col-sm-4 p-t-7">
                             <a href="">申请地址</a>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword" class="col-sm-2 control-label t-l">新加好友自动回复</label>
-                        <div class="col-sm-5">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="自动回复内容">
+                        <div class="col-sm-6">
+                            <textarea  class="form-control" rows="5" placeholder="自动回复内容" v-model="formData.NEWFRIENDREPLY"></textarea>
                         </div>
-                        <div class="col-sm-5 p-t-7">
+                        <div class="col-sm-4 p-t-7">
                         </div>
                     </div>
                     <div class="form-group">
@@ -106,25 +105,42 @@
                             <label for="exampleInputEmail1" class="blue-color">每日说定时任务</label>
                         </div>
                         <div>
-                            <div class="col-sm-1"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="微信昵称"></div>
-                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="微信备注"></div>
-                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="两人纪念日"></div>
-                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="好友所在城市"></div>
-                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="结尾备注"></div>
-                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="循环日期"></div>
+                            <div class="col-sm-1"><input type="text" class="form-control"
+                                                         placeholder="微信昵称" v-model="dayListInit.name"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control"
+                                                         placeholder="微信备注" v-model="dayListInit.alias"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control" id="memorial"
+                                                         placeholder="两人纪念日" v-model="dayListInit.memorialDay"></div>
+                            <div class="col-sm-1 p-r-0"><input type="text" class="form-control"
+                                                         placeholder="城市" v-model="dayListInit.city"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control"
+                                                         placeholder="结尾备注" v-model="dayListInit.endWord"></div>
+                            <div class="col-sm-3">
+                                <div class="col-sm-4 p-l-0">
+                                    <select class="form-control" name="round-cycle" v-model="dayListInit.cycle">
+                                        <option value="day">每天</option>
+                                        <option value="week">每周</option>
+                                        <option value="month">每月</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 p-l-0" v-if="dayListInit.cycle!=='day'">
+                                    <select class="form-control" name="round-cycle" v-model="dayListInit.day">
+                                        <option :value="count" v-if="dayListInit.cycle=='week'" v-for="count in 7">{{ filterWeek(count) }}</option>
+                                        <option :value="count" v-if="dayListInit.cycle=='month'" v-for="count in 31">{{ count }}号</option>
+                                    </select>
+                                </div>
+                                <div class="p-r-0 p-l-0" :class="dayListInit.cycle=='day'?'col-sm-8':'col-sm-4'">
+                                    <input id="cycle-date" type="text" class="form-control form-inline p-l-5 p-r-5"
+                                           placeholder="时间" v-model="dayListInit.time">
+                                </div>
+                            </div>
                             <div class="col-sm-1">
-                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                                <a class="btn btn-link" @click="addDayTask('dayListInit','DAYLIST')"><span class="fa fa-plus"></span></a>
                             </div>
                         </div>
                         <div>
                             <div class="col-sm-12">
-                                <table  class="table table-hover">
+                                <table  class="table table-bordered wechat-table">
                                     <thead>
                                     <tr>
                                         <td>微信昵称</td>
@@ -133,16 +149,18 @@
                                         <td>好友所在城市</td>
                                         <td>结尾备注</td>
                                         <td>循环日期</td>
+                                        <td class="col-sm-1">操作</td>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                    <tr v-for="(item,index) in formData.DAYLIST">
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.alias }}</td>
+                                        <td>{{ item.memorialDay }}</td>
+                                        <td>{{ item.city }}</td>
+                                        <td>{{ item.endWord }}</td>
+                                        <td>{{ convertFormatToDate(item.date) }}</td>
+                                        <td><a @click="deleteItem(index,'DAYLIST')">删除</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -154,35 +172,58 @@
                             <label for="exampleInputEmail1" class="blue-color">群定时任务</label>
                         </div>
                         <div>
-                            <div class="col-sm-3"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="群名"></div>
-                            <div class="col-sm-2"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="新闻类型"></div>
-                            <div class="col-sm-3"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="结尾备注"></div>
-                            <div class="col-sm-3"><input type="text" class="form-control" id="inputPassword"
-                                                         placeholder="循环日期"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control"
+                                                         placeholder="群名" v-model="roomListInit.roomName"></div>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="" id="" v-model="roomListInit.sortId">
+                                    <option value="">选择新闻类型</option>
+                                    <option :value="key" v-for="(val,key,i) in newList">{{ val }}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3"><input type="text" class="form-control"
+                                                         placeholder="结尾备注" v-model="roomListInit.endWord"></div>
+                            <div class="col-sm-3">
+                                <div class="col-sm-4 p-l-0">
+                                    <select class="form-control" name="round-cycle" v-model="roomListInit.cycle">
+                                        <option value="day">每天</option>
+                                        <option value="week">每周</option>
+                                        <option value="month">每月</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 p-l-0" v-if="roomListInit.cycle!=='day'">
+                                    <select class="form-control" name="round-cycle" v-model="roomListInit.day">
+                                        <option :value="count" v-if="roomListInit.cycle=='week'" v-for="count in 7">{{ filterWeek(count) }}</option>
+                                        <option :value="count" v-if="roomListInit.cycle=='month'" v-for="count in 31">{{ count }}号</option>
+                                    </select>
+                                </div>
+                                <div class="p-r-0 p-l-0" :class="roomListInit.cycle=='day'?'col-sm-8':'col-sm-4'">
+                                    <input id="cycle-date-room" type="text" class="form-control form-inline p-l-5 p-r-5"
+                                           placeholder="时间" v-model="roomListInit.time">
+                                </div>
+                            </div>
                             <div class="col-sm-1">
-                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                                <a class="btn btn-link" @click="addDayTask('roomListInit','ROOMLIST')"><span class="fa fa-plus"></span></a>
                             </div>
                         </div>
                         <div>
                             <div class="col-sm-12">
-                                <table  class="table table-hover">
+                                <table  class="table table-bordered wechat-table">
                                     <thead>
                                         <tr>
                                             <td>群名</td>
                                             <td>新闻类型</td>
                                             <td>结尾备注</td>
                                             <td>循环日期</td>
+                                            <td class="col-sm-1">操作</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                        <tr v-for="(item,index) in formData.ROOMLIST">
+                                            <td>{{ item.roomName }}</td>
+                                            <td>{{ newList[item.sortId] }}</td>
+                                            <td>{{ item.endWord }}</td>
+                                            <td>{{ convertFormatToDate(item.date) }}</td>
+                                            <td><a @click="deleteItem(index,'ROOMLIST')">删除</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -194,27 +235,29 @@
                             <label for="exampleInputEmail1" class="blue-color">进群欢迎词</label>
                         </div>
                         <div>
-                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" v-model="roomJoinListInit.name"
                                                          placeholder="群名"></div>
-                            <div class="col-sm-7 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                            <div class="col-sm-7 p-r-0"><input type="text" class="form-control" v-model="roomJoinListInit.welcome"
                                                          placeholder="欢迎内容"></div>
                             <div class="col-sm-1">
-                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                                <a class="btn btn-link" @click="addDayTask('roomJoinListInit','ROOMJOINLIST')"roomListInit><span class="fa fa-plus"></span></a>
                             </div>
                         </div>
                         <div>
                             <div class="col-sm-12">
-                                <table  class="table table-hover">
+                                <table  class="table table-bordered wechat-table">
                                     <thead>
                                     <tr>
                                         <td>群名</td>
                                         <td>欢迎内容</td>
+                                        <td class="col-sm-1">操作</td>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
+                                    <tr v-for="(item,index) in formData.ROOMJOINLIST">
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.welcome }}</td>
+                                        <td><a >删除</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -226,27 +269,29 @@
                             <label for="exampleInputEmail1" class="blue-color">关键词回复</label>
                         </div>
                         <div>
-                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control"
                                                                placeholder="多个关键词，请使用中文'，'隔开"></div>
-                            <div class="col-sm-7 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                            <div class="col-sm-7 p-r-0"><input type="text" class="form-control"
                                                                placeholder="回复内容"></div>
                             <div class="col-sm-1">
-                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                                <a class="btn btn-link" @click="addDayTask('keyWordListInit','KEYWORDLIST')"><span class="fa fa-plus"></span></a>
                             </div>
                         </div>
                         <div>
                             <div class="col-sm-12">
-                                <table  class="table table-hover">
+                                <table  class="table table-bordered wechat-table">
                                     <thead>
                                     <tr>
                                         <td>关键词</td>
                                         <td>回复内容</td>
+                                        <td class="col-sm-1">操作</td>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
+                                    <tr v-for="(item,index) in formData.KEYWORDLIST">
+                                        <td><span v-for="(key,index) in item.key">{{ key }},</span></td>
+                                        <td>{{ item.reply }}</td>
+                                        <td><a >删除</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -258,27 +303,29 @@
                             <label for="exampleInputEmail1" class="blue-color">关键词加群</label>
                         </div>
                         <div>
-                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control"
                                                                placeholder="多个关键词，请使用中文'，'隔开"></div>
-                            <div class="col-sm-7 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                            <div class="col-sm-7 p-r-0"><input type="text" class="form-control"
                                                                placeholder="群名"></div>
                             <div class="col-sm-1">
-                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                                <a class="btn btn-link" @click="addDayTask('addRoomKeyListInit','ADDROOMKEYLIST')"><span class="fa fa-plus"></span></a>
                             </div>
                         </div>
                         <div>
                             <div class="col-sm-12">
-                                <table  class="table table-hover">
+                                <table  class="table table-bordered wechat-table">
                                     <thead>
                                     <tr>
                                         <td>关键词</td>
                                         <td>群名</td>
+                                        <td class="col-sm-1">操作</td>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
+                                    <tr v-for="(item,index) in formData.ADDROOMKEYLIST">
+                                        <td><span v-for="(key,index) in item.key">{{ key }},</span></td>
+                                        <td>{{ item.roomName }}</td>
+                                        <td><a >删除</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -290,31 +337,33 @@
                             <label for="exampleInputEmail1" class="blue-color">关键词触发指定事件</label>
                         </div>
                         <div>
-                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control"
                                                                placeholder="关键词"></div>
-                            <div class="col-sm-3 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                            <div class="col-sm-3 p-r-0"><input type="text" class="form-control"
                                                                placeholder="关键词所在位置"></div>
-                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control" id="inputPassword"
+                            <div class="col-sm-4 p-r-0"><input type="text" class="form-control"
                                                                placeholder="触发事件"></div>
                             <div class="col-sm-1">
-                                <a class="btn btn-link" ><span class="fa fa-plus"></span></a>
+                                <a class="btn btn-link" @click="addDayTask('eventKeywordListInit','EVENTKEYWORDLIST')"><span class="fa fa-plus"></span></a>
                             </div>
                         </div>
                         <div>
                             <div class="col-sm-12">
-                                <table  class="table table-hover">
+                                <table  class="table table-bordered wechat-table">
                                     <thead>
                                     <tr>
                                         <td>关键词</td>
                                         <td>关键词位置</td>
                                         <td>触发事件</td>
+                                        <td class="col-sm-1">操作</td>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                    <tr v-for="(item,index) in formData.EVENTKEYWORDLIST">
+                                        <td><span v-for="(key,index) in item.key">{{ key }},</span></td>
+                                        <td>{{ item.position}}</td>
+                                        <td>{{ item.event }}</td>
+                                        <td><a >删除</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -328,6 +377,7 @@
 </div>
 <script src="./static/js/jquery-3.4.1.min.js"></script>
 <script src="./static/js/bootstrap.min.js"></script>
+<script src="./static/laydate/laydate.js"></script>
 <script src="./static/js/vue.js"></script>
 <script src="./static/js/axios.min.js"></script>
 <script src="./static/js/qs.min.js"></script>

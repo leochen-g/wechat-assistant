@@ -20,7 +20,7 @@ let config = new Schema({
         alias:String,
         memorialDay:String,
         city:String,
-        endword:String,
+        endWord:String,
         date:String
     }],
     ROOMLIST:[{
