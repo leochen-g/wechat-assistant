@@ -9,7 +9,8 @@
 ![](https://img.shields.io/badge/Centos-blue.svg)
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+> 注意由于本项目所有功能都已经移植到同账号下的[智能微秘书-插件版](https://github.com/gengchen528/wechat-assistant-pro) 下，故本项目已不再更新维护，想了解源码的朋友可以在同账号下[WechatyWebPanel](https://github.com/gengchen528/wechaty-web-panel)中查看
 
 - [微信小助手2.0全新升级](#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E5%8A%A9%E6%89%8B20%E5%85%A8%E6%96%B0%E5%8D%87%E7%BA%A7)
 - [效果预览](#%E6%95%88%E6%9E%9C%E9%A2%84%E8%A7%88)
