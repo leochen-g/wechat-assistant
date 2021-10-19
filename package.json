@@ -36,7 +36,8 @@
         "node-schedule": "^1.3.2",
         "qrcode-terminal": "^0.12.0",
         "superagent": "^5.0.2",
-        "wechaty": "^0.28.3"
+        "wechaty": "^0.68.1",
+        "wechaty-puppet-wechat": "^0.30.6"
     },
     "devDependencies": {
         "@microsoft/recognizers-text-suite": "~1.2.7",
